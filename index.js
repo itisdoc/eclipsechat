@@ -37,109 +37,6 @@ const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
-app.use(function(req, res, next) {
-  if (req.headers['user-agent'].includes('eclipse-desktop')) {
-    if (req.originalUrl.includes('/desktop') || req.originalUrl.includes('get')) {
-      next()
-    } else {
-      if (req.method == "POST") return next()
-      res.redirect('/desktop' + req.originalUrl)
-    }
-  } else {
-    next()
-  }
-})
-
-async function getScore(auser) {
-  console.log(auser)
-  const user = await users.get(auser.username)
-  const allMessages = await messages.getAll()
-  const scMessages = Object.keys(allMessages).filter(k => k.includes(user.username) && k.includes('_'))
-  let allMsgs = 0
-  function updateStreakByOne() {
-    allMsgs = allMsgs + 1
-  }
-  for (msg of scMessages) {
-    const msgList = await messages.get(msg)
-    const updt = Object.values(msgList)
-    for (msgg of updt) {
-      if (msgg.username == auser.username) {
-        updateStreakByOne()
-      }
-    }
-
-  }
-  return allMsgs * 100
-}
-
-app.get('/desktop/login', async (req, res) => {
-
-  if (req.session.user) {
-    res.redirect('/app')
-  } else {
-    if (req.cookies.accountKey) {
-      const userz = Object.values(await users.getAll())
-      const allUsers = userz.filter(u => u.contacts !== undefined)
-      allUsers.forEach(user => {
-        if (user.accountKeys && user.accountKeys.includes(req.cookies.accountKey)) {
-          req.session.user = user
-          res.redirect('/app')
-        }
-      })
-    } else {
-      res.sendFile(__dirname + '/views/login.html')
-    }
-  }
-})
-
-app.get('/desktop/app', async (req, res) => {
-
-  if (!req.session.user) {
-    res.redirect('/login')
-  } else {
-    var device = require('device');
-    var mydevice = device(req.headers['user-agent']);
-    let is_desktop;
-    if (mydevice.is('desktop')) {
-      is_desktop = true
-    } else {
-      is_desktop = false
-    }
-    const msgs = await messages.getAll()
-    const userr = await emails.get(req.session.user.email)
-    const allServers = Object.values(await servers.getAll()).filter(s => s.members)
-    let userServers;
-    if (allServers == null || allServers == undefined) {
-      userServers = []
-    } else {
-      userServers = allServers.filter(s => s.members.includes(userr.username) || s.creator == userr.username)
-    }
-    res.render('desktopapp', { me: userr, messages: msgs, is_desktop, servers: userServers })
-  }
-})
-
-
-
-app.get('/desktop/messages/:username', async (req, res) => {
-  if (!req.session.user) {
-    res.redirect('/login')
-  } else {
-    var device = require('device');
-    var mydevice = device(req.headers['user-agent']);
-    let is_desktop;
-    if (mydevice.is('desktop')) {
-      is_desktop = true
-    } else {
-      is_desktop = false
-    }
-    const member = new Array(req.session.user.username, req.params.username).sort().join('_')
-    const messageList = await messages.get(member)
-    const me = await emails.get(req.session.user.email)
-    const user = await users.get(req.params.username)
-    const msgs = await messages.getAll()
-    res.render('desktopmessages', { me: me, messages: messageList, user: user, is_desktop, allMessages: msgs })
-  }
-})
 
 app.get('/api/me', (req, res) => {
   if (!req.session.user) {
@@ -158,10 +55,15 @@ async function updateUsers() {
     let newUsr = u;
     if (u.avatar == "https://i.ibb.co/414YQvv/image.png") {
       newUsr.avatar == "https://i.ibb.co/3N90ysR/image.png"
-      await users.set(newUsr.username, newUsr)
+    }
+    if (!u.status) {
+      newUsr.status = ""
+    }
+    if (!u.onlineAt) {
+      newUsr.onlineAt = 0
 
     }
-
+    await users.set(newUsr.username, newUsr)
 
   })
 }
@@ -224,16 +126,6 @@ async function editUser(username, user) {
 
 
 function checkForMissingData(obj) {
-  const classParams = {
-    email: new String(),
-    // https://i.ibb.co/3N90ysR/image.png
-    avatar: "https://i.ibb.co/3N90ysR/image.png",
-    username: new String(),
-    nickname: '',
-    hashedPassword: new String(),
-    bio: 'No bio set.',
-    contacts: new Array()
-  }
   const missingList = new Array()
   const objParams = Object.getOwnPropertyNames(obj);
   objParams.forEach(param => {
@@ -492,15 +384,12 @@ app.get('/:username/getAllMessageGroups', async (req, res) => {
   const allMessages = await messages.getAll()
   const scMessages = Object.keys(allMessages).filter(k => k.includes(user.username) && k.includes('_'))
   let allMsgs = 0
-  function updateStreakByOne() {
-    allMsgs = allMsgs + 1
-  }
   for (msg of scMessages) {
     const msgList = await messages.get(msg)
     const updt = Object.values(msgList)
     for (msgg of updt) {
       if (msgg.username == req.params.username) {
-        updateStreakByOne()
+        allMsgs = allMsgs + 1
       }
     }
 
@@ -590,15 +479,6 @@ app.get('/users/:user', async function(req, res) {
   res.render('user', { me, user })
 })
 
-
-app.get('/desktop/users/:user', async function(req, res) {
-  if (!req.session.user) res.redirect('/login')
-  const user = await users.get(req.params.user)
-  const me = await users.get(req.session.user.username)
-  if (user == null) return res.send('user doesn\'t exist! <a href="/app">go home</a>')
-
-  res.render('user', { me, user })
-})
 
 
 app.listen(3000, () => {
