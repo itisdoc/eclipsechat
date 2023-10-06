@@ -259,6 +259,8 @@ app.post('/signup', async (req, res) => {
           user.hashedPassword = hash
           delete user.password
           user.contacts = []
+          user.status = ""
+          user.lastOnline = Date.now()
 
           const finalUser = user
 
@@ -326,7 +328,6 @@ app.get('/logout', async (req, res) => {
 
 
 app.get('/app', async (req, res) => {
-
   if (!req.session.user) {
     res.redirect('/login')
   } else {
@@ -340,6 +341,10 @@ app.get('/app', async (req, res) => {
     }
     const msgs = await messages.getAll()
     const userr = await emails.get(req.session.user.email)
+    userr.lastOnline = Date.now()
+    await emails.set(userr.email, userr)
+    await users.set(userr.username, userr)
+    
     const allServers = Object.values(await servers.getAll()).filter(s => s.members)
     let userServers;
     if (allServers == null || allServers == undefined) {
@@ -371,10 +376,24 @@ app.get('/messages/:username', async (req, res) => {
     const member = new Array(req.session.user.username, req.params.username).sort().join('_')
     const messageList = await messages.get(member)
     const me = await emails.get(req.session.user.email)
+    
+    me.lastOnline = Date.now()
+    await emails.set(me.email, userr)
+    await users.set(me.username, userr)
+    
     const user = await users.get(req.params.username)
     const msgs = await messages.getAll()
     res.render('messages', { me: me, messages: messageList, user: user, is_desktop, allMessages: msgs, getScore: async (usr) => await getScore(usr) })
   }
+})
+
+app.get('/api/@me/setOnline', async (req, res) => {
+      const userr = await emails.get(req.session.user.email)
+
+    userr.lastOnline = Date.now()
+    await emails.set(userr.email, userr)
+    await users.set(userr.username, userr)
+    res.status(200).send('we good')
 })
 
 
@@ -483,4 +502,4 @@ app.get('/users/:user', async function(req, res) {
 
 app.listen(3000, () => {
   console.log('started')
-})
+}) 
