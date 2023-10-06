@@ -1,0 +1,1862 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<% if (is_desktop == true) { %>
+<html><head><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+
+  <title><%= user.username %> - Eclipse</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+ <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<style>
+  
+  body, html {
+    overflow-y:hidden; 
+  }
+  
+  .banner {
+    font-family:Inter Variable;
+  }
+
+  
+  *,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+  
+  .msg-box {
+    margin-top:20px;
+  }
+
+.sidebar > .contacts {
+overflow-y:scroll;    
+  }
+
+
+.msg-list {
+  display: flex;
+width: 100%;
+  max-height:100%;
+flex:1;
+  flex-shrink:0;
+  overflow-y:scroll;
+flex-direction: column;
+align-items: center;
+gap: 20px;
+flex-shrink: 0;
+}
+
+.incoming {
+  display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+align-self: stretch;
+}
+
+.outgoing {
+  display: flex;
+flex-direction: column;
+align-items: flex-end;
+gap: 10px;
+align-self: stretch;
+}
+
+.incoming > .bubble {
+  font-family:Inter;
+display: flex;
+padding: 18px;
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+border-radius: 20px 20px 20px 0px;
+background: #EFEFEF;
+  
+  color: #424242;
+font-family: Inter Variable;
+font-size: 15px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.outgoing > .bubble {
+  display: flex;
+padding: 18px;
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+  
+border-radius: 20px 20px 0px 20px;
+background: rgba(181, 96, 246, 0.10);
+  
+   color: #424242;
+font-family: Inter Variable;
+font-size: 15px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+
+i {
+  font-family: "Material Symbols Outlined";
+  font-style:normal;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24;
+  font-size:16px;
+}
+  
+
+.contact:hover {
+  cursor:pointer;
+  opacity:0.75;
+}
+
+#typing {
+  display:none;
+}
+
+  .bubble {
+    font-family: Inter Variable;
+  }
+
+  .bubble > img, .bubble > iframe, .bubble > video {
+  width:25%;
+  }
+
+  .bubble > script, .bubble > button {
+    display:none;
+  }
+
+  .bubble > script:after, .bubble > button:after {
+  content: "Removed due to exploitation"
+  }
+
+.row .fullw {
+    background:none;
+  outline:none;
+  border:none;
+  width:100%;
+}
+
+
+.replying > button {
+  border:0;
+  background:none;
+  
+}
+
+.msg-input:has(span) {
+  flex-direction: column;
+}
+
+.msg-input:has(span) > span {
+   width:100%;
+  
+  padding:10px;
+}
+
+.repl > .c > p {
+  margin:0;
+}
+
+.incoming > .bubble > span {
+  width:100%;
+  padding:15px;
+   background:#DBDBDB;
+color: #505050;
+}
+
+.repl {
+  font-family:Inter;
+  font-size:12px;
+  border-radius:9.75px;
+  display:flex;
+  flex-direction:row;
+}
+
+.repl > .c {
+  
+  gap:5px;
+  display:flex;
+   flex-direction:column;
+}
+
+.repl > .c > .content {
+  font-size:16px;
+}
+
+.repl > .c {
+  width:75%;
+}
+
+
+.repl >  button {
+  background:none;
+  border:0;
+  width:25%;
+  text-align:right;
+}
+
+.msg-input > input::placeholder, .replying > input::placeholder {
+  color:#9f9f9f;
+  font-family:Inter;
+}
+
+.bubble:has(.actions) {
+  display:flex;
+  flex-direction:row;
+  gap:5px;
+}
+
+.actions {
+  display:flex;
+  flex-direction:row;
+}
+
+.actions > button {
+  background:none;
+  border:0;
+}
+  
+  body {
+  background: #F2E4FB;
+  display: flex;
+width: 100vw;
+height: 100vh;
+padding: 24px; 
+flex-direction: column;
+    justify-content:center;
+align-items: center;
+gap: 24px;
+}
+
+
+i {
+  font-family: "Material Symbols Rounded";
+  font-style:normal;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 600,
+  'GRAD' 0,
+  'opsz' 24;
+}
+  
+  .banner {
+    border-radius: 24px;
+background: rgba(180, 57, 255, 0.20);
+    display: flex;
+    height:100%;
+padding: 18px 24px;
+justify-content: space-between;
+align-items: center;
+align-self: stretch;
+
+    
+    color: #B439FF;
+font-family: Inter Variable;
+font-size: 15px;
+font-style: normal;
+font-weight: 500;
+line-height: 24px; /* 100% */
+  }
+  
+  #closing:hover {
+    cursor:pointer;
+  }
+   
+  @media only screen and (max-width:1000px) {
+    #bannerIcon {
+      display:none;
+    }
+  }
+  
+  .app {
+    display: flex;
+align-items: center;
+    width:100%;
+    height:100%;
+gap: 24px;
+flex: 1 0 0;
+align-self: stretch;
+  }
+  
+  .sidebar {
+    border-radius: 24px;
+background: #FFF;
+    display: flex;
+width: 30vw;
+   height:100%;
+min-width: 300px;
+max-width: 100vw;
+padding: 20px;
+flex-direction: column;
+align-items: flex-start;
+gap: 24px;
+align-self: stretch;
+  }
+  
+  .messages {
+    display: flex;
+min-width: 380px;
+     max-height:100vh;
+max-width: 100vw;
+    width:70vw;
+padding: 20px;
+flex-direction: column;
+align-items: flex-start;
+gap: 0px;
+    
+    margin:0;
+align-self: stretch;
+    border-radius: 24px;
+background: #FFF;
+  }
+  
+  .user-info {
+    display: flex;
+justify-content: center;
+align-items: center;
+gap: 24px;
+align-self: stretch;
+  }
+  
+  .user {
+    display: flex;
+align-items: center;
+gap: 15px;
+flex: 1 0 0;
+  }
+  
+  
+  .button {
+    display: flex;
+padding: 9px 12px;
+justify-content: center;
+align-items: center;
+    
+gap: 8.96px;
+    border:0;
+    border-radius: 15px;
+font-family: Inter Variable;
+    text-align:center;
+font-size: 12px;
+font-style: normal;
+font-weight: 500;
+  }
+  
+  .blue {
+    color:#787DEA;
+background: rgba(120, 125, 234, 0.20);
+  }
+  
+  .orange {
+    color: #FF5F1B;
+     background: rgba(255, 95, 27, 0.20);
+  }
+  
+  .purple {
+    background: rgba(180, 57, 255, 0.20);
+    color: #B439FF;
+  }
+  
+  .button:hover {
+    cursor:pointer;
+    backdrop-filter:brightness(0.90);
+  }
+  
+  .button > i {
+  font-family: "Material Symbols Rounded";
+  font-style:normal;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24;
+}
+  
+  .user > img {
+    border-radius: 7.5px;
+background: rgba(120, 125, 234, 0.20);
+    width: 42px;
+height: 42px;
+  }
+  
+  .user > h1 {
+    flex: 1 0 0;
+    color: #000;
+font-family: Inter Variable;
+font-size: 20px;
+font-style: normal;
+font-weight: 580;
+line-height: 20px; /* 100% */
+  }
+  
+  .button-list {
+    display: flex;
+justify-content: start;
+align-items: flex-start;
+gap: 12px;
+align-self: stretch;
+  }
+  
+  .contacts {
+    display: flex;
+padding: 24px 0px 24px 24px;
+flex-direction: column;
+justify-content: flex-end;
+align-items: flex-end;
+gap: 12px;
+align-self: stretch;
+    border-radius: 22px;
+border: 2px solid rgba(120, 125, 234, 0.20);
+  }
+  
+  .contact {
+    display: flex;
+align-items: center;
+    align-self:stretch;
+gap: 16px;
+  }
+  
+  .contact > img {
+    border-radius: 5px;
+background: rgba(120, 125, 234, 0.20);
+    width: 32px;
+height: 32px;
+  }
+  
+  .contact-info {
+    display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+gap: 6px;
+flex: 1 0 0;
+  }
+  
+  .contact-info > * {
+    margin:0;
+  }
+  
+  .contact-info > h1 {
+    align-self: stretch;
+    color: #000;
+font-family: Inter Variable;
+font-size: 15px;
+font-style: normal;
+font-weight: 500;
+line-height: 12px; /* 100% */
+  }
+  
+  .contact-info > p {
+    color: rgba(120, 125, 234, 0.80);
+font-family: Inter Variable;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 8px; /* 100% */
+    align-self:stretch;
+  }
+ 
+  
+  .hr {
+    width: 324px;
+height: 0px;
+    stroke-width: 2px;
+stroke: rgba(120, 125, 234, 0.20);
+  }
+  
+  .msg-box >input {
+    border-radius: 22px;
+border: 2px solid rgba(120, 125, 234, 0.20);
+    display: flex;
+padding: 10px 12px;
+align-items: center;
+gap: 12px;
+flex: 1 0 0;
+    color: rgba(120, 125, 234, 0.40);
+font-family: Inter Variable;
+font-size: 12px;
+font-style: normal;
+font-weight: 500;
+line-height: 12px; /* 100% */
+  }
+  
+  .msg-box > input::placeholder {
+     color: rgba(120, 125, 234, 0.40);
+font-family: Inter Variable;
+font-size: 12px;
+font-style: normal;
+font-weight: 500;
+line-height: 12px; /* 100% */
+  }
+  
+  .msg-box > input:focus {
+    outline:none;
+  }
+  
+  .msg-box {
+    display: flex;
+width: 100%;
+align-items: flex-start;
+gap: 12px;
+  }
+  
+  .row {
+    display:flex;
+    flex-direction:row;
+    gap:20px;
+  }
+  
+  @media only screen and (min-width:781px) {
+    .back {
+      display:none;
+    }
+  }
+  
+  @media only screen and (max-width:780px) {
+    .sidebar {
+      display:none;
+    }
+    .messages {
+      width:100%;
+      min-width:250px;
+    }
+    
+    .msg-box {
+      width:100%;
+      min-width:250px;
+    }
+    
+    .incoming > .bubble, .outgoing > .bubble {
+      padding:14px;
+      
+    }
+    
+    .messages > * {
+      margin-top:10px;
+    }
+    
+    body,html {
+      overflow:hidden;
+    }
+    
+    .app {
+      justify-content:center;
+      align-items:center;
+    }
+  }
+  .banner {
+    font-family:Inter Variable;
+  }
+  
+  *,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+.messages > * {
+  margin:10px;
+}
+
+.msg-list {
+  display: flex;
+width: 100%;
+  max-height:100%;
+flex:1;
+  flex-shrink:0;
+  overflow-y:scroll;
+flex-direction: column;
+align-items: center;
+gap: 20px;
+flex-shrink: 0;
+}
+
+.incoming {
+  display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+align-self: stretch;
+}
+
+.outgoing {
+  display: flex;
+flex-direction: column;
+align-items: flex-end;
+gap: 10px;
+align-self: stretch;
+}
+
+.incoming > .bubble {
+  font-family:Inter;
+display: flex;
+padding: 18px;
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+border-radius: 20px 20px 20px 0px;
+background: #EFEFEF;
+  
+  color: #424242;
+font-family: Inter Variable;
+font-size: 15px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+.outgoing > .bubble {
+  display: flex;
+padding: 18px;
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+  
+border-radius: 20px 20px 0px 20px;
+background: rgba(181, 96, 246, 0.10);
+  
+   color: #424242;
+font-family: Inter Variable;
+font-size: 15px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+
+
+i {
+  font-family: "Material Symbols Outlined";
+  font-style:normal;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24;
+  font-size:16px;
+}
+
+.contact:hover {
+  cursor:pointer;
+  opacity:0.75;
+}
+
+#typing {
+  display:none;
+}
+
+  .bubble {
+    font-family: Inter Variable;
+  }
+
+  .bubble > img, .bubble > iframe, .bubble > video {
+  width:25%;
+  }
+
+  .bubble > script, .bubble > button {
+    display:none;
+  }
+
+  .bubble > script:after, .bubble > button:after {
+  content: "Removed due to exploitation"
+  }
+
+.row .fullw {
+    background:none;
+  outline:none;
+  border:none;
+  width:100%;
+}
+
+
+.replying > button {
+  border:0;
+  background:none;
+  
+}
+
+.msg-input:has(span) {
+  flex-direction: column;
+}
+
+.msg-input:has(span) > span {
+   width:100%;
+  
+  padding:10px;
+}
+
+.repl > .c > p {
+  margin:0;
+}
+
+.incoming > .bubble > span {
+  width:100%;
+  padding:15px;
+   background:#DBDBDB;
+color: #505050;
+}
+
+.repl {
+  font-family:Inter;
+  font-size:12px;
+  border-radius:9.75px;
+  display:flex;
+  flex-direction:row;
+}
+
+.repl > .c {
+  
+  gap:5px;
+  display:flex;
+   flex-direction:column;
+}
+
+.repl > .c > .content {
+  font-size:16px;
+}
+
+.repl > .c {
+  width:75%;
+}
+
+
+.repl >  button {
+  background:none;
+  border:0;
+  width:25%;
+  text-align:right;
+}
+
+.msg-input > input::placeholder, .replying > input::placeholder {
+  color:#9f9f9f;
+  font-family:Inter;
+}
+
+.bubble:has(.actions) {
+  display:flex;
+  flex-direction:row;
+  gap:5px;
+}
+
+.actions {
+  display:flex;
+  flex-direction:row;
+}
+
+.actions > button {
+  background:none;
+  border:0;
+}
+  
+  body {
+  background: #F2E4FB;
+  display: flex;
+width: calc(100vw - 24px);
+height: calc(100vh - 24px);
+padding: 24px; 
+flex-direction: column;
+align-items: center;
+gap: 24px;
+}
+
+
+i {
+  font-family: "Material Symbols Rounded";
+  font-style:normal;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 600,
+  'GRAD' 0,
+  'opsz' 24;
+}
+  
+  .banner {
+    border-radius: 24px;
+background: rgba(180, 57, 255, 0.20);
+    display: flex;
+padding: 18px 24px;
+justify-content: space-between;
+align-items: center;
+align-self: stretch;
+
+    
+    color: #B439FF;
+font-family: Inter Variable;
+font-size: 15px;
+font-style: normal;
+font-weight: 500;
+line-height: 24px; /* 100% */
+  }
+  
+  #closing:hover {
+    cursor:pointer;
+  }
+   
+  @media only screen and (max-width:1000px) {
+    #bannerIcon {
+      display:none;
+    }
+  }
+  
+  .app {
+    display: flex;
+align-items: center;
+    max-height:100vh;
+gap: 24px;
+flex: 1 0 0;
+align-self: stretch;
+  }
+  
+  .sidebar {
+    border-radius: 24px;
+background: #FFF;
+    display: flex;
+width: 30vw;
+    max-height:calc(100% - 30px);
+min-width: 300px;
+max-width: 100vw;
+padding: 20px;
+flex-direction: column;
+align-items: flex-start;
+gap: 24px;
+align-self: stretch;
+  }
+  
+  .messages {
+    display: flex;
+min-width: 380px;
+     max-height:calc(100% - 20px);
+max-width: 100vw;
+    width:70vw;
+padding: 20px;
+flex-direction: column;
+align-items: flex-start;
+gap: 0px;
+    
+    margin:0;
+align-self: stretch;
+    border-radius: 24px;
+background: #FFF;
+  }
+  
+  .user-info {
+    display: flex;
+justify-content: center;
+align-items: center;
+gap: 24px;
+align-self: stretch;
+  }
+  
+  .user {
+    display: flex;
+align-items: center;
+gap: 15px;
+flex: 1 0 0;
+  }
+  
+  .button {
+    display: flex;
+padding: 9px 12px;
+justify-content: center;
+align-items: center;
+gap: 8.96px;
+    border:0;
+    border-radius: 15px;
+font-family: Inter Variable;
+    text-align:center;
+font-size: 12px;
+font-style: normal;
+font-weight: 500;
+  }
+  
+  .blue {
+    color:#787DEA;
+background: rgba(120, 125, 234, 0.20);
+  }
+  
+  .orange {
+    color: #FF5F1B;
+     background: rgba(255, 95, 27, 0.20);
+  }
+  
+  .purple {
+    background: rgba(180, 57, 255, 0.20);
+    color: #B439FF;
+  }
+  
+  .button:hover {
+    cursor:pointer;
+    backdrop-filter:brightness(0.90);
+  }
+  
+  .button > i {
+  font-family: "Material Symbols Rounded";
+  font-style:normal;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24;
+}
+  
+  .user > img {
+    border-radius: 7.5px;
+background: rgba(120, 125, 234, 0.20);
+    width: 42px;
+height: 42px;
+  }
+  
+  .user > h1 {
+    flex: 1 0 0;
+    color: #000;
+font-family: Inter Variable;
+font-size: 20px;
+font-style: normal;
+font-weight: 580;
+line-height: 20px; /* 100% */
+  }
+  
+  .button-list {
+    display: flex;
+justify-content: start;
+align-items: flex-start;
+gap: 12px;
+align-self: stretch;
+  }
+  
+  .contacts {
+    display: flex;
+padding: 24px 0px 24px 24px;
+flex-direction: column;.
+justify-content: flex-end;
+align-items: flex-end;
+gap: 12px;
+align-self: stretch;
+    border-radius: 22px;
+border: 2px solid rgba(120, 125, 234, 0.20);
+  }
+  
+  .contact {
+    display: flex;
+align-items: center;
+    align-self:stretch;
+gap: 16px;
+  }
+  
+  .contact > img {
+    border-radius: 5px;
+background: rgba(120, 125, 234, 0.20);
+    width: 32px;
+height: 32px;
+  }
+  
+  .contact-info {
+    display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+gap: 6px;
+flex: 1 0 0;
+  }
+  
+  .contact-info > * {
+    margin:0;
+  }
+  
+  .contact-info > h1 {
+    align-self: stretch;
+    color: #000;
+font-family: Inter Variable;
+font-size: 15px;
+font-style: normal;
+font-weight: 500;
+line-height: 12px; /* 100% */
+  }
+  
+  .contact-info > p {
+    color: rgba(120, 125, 234, 0.80);
+font-family: Inter Variable;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: 8px; /* 100% */
+    align-self:stretch;
+  }
+  
+  .hr {
+    width: 324px;
+height: 0px;
+    stroke-width: 2px;
+stroke: rgba(120, 125, 234, 0.20);
+  }
+  
+  .msg-box >input {
+    border-radius: 22px;
+border: 2px solid rgba(120, 125, 234, 0.20);
+    display: flex;
+padding: 10px 12px;
+align-items: center;
+gap: 12px;
+flex: 1 0 0;
+    color: rgba(120, 125, 234, 0.40);
+font-family: Inter Variable;
+font-size: 12px;
+font-style: normal;
+font-weight: 500;
+line-height: 12px; /* 100% */
+  }
+  
+  .msg-box > input::placeholder {
+     color: rgba(120, 125, 234, 0.40);
+font-family: Inter Variable;
+font-size: 12px;
+font-style: normal;
+font-weight: 500;
+line-height: 12px; /* 100% */
+  }
+  
+  .msg-box > input:focus {
+    outline:none;
+  }
+  
+  .msg-box {
+    display: flex;
+width: 100%;
+align-items: flex-start;
+gap: 12px;
+  }
+  
+  </style>
+</head>
+  <body>
+    <div class="banner">
+      <i id="bannerIcon">dark_mode</i> Welcome to Eclipse! This is the beta version, so you may experience a few glitches. Don’t worry though — we’ll fix them. <i onclick="this.parentElement.remove()" id="closing">close</i>
+    </div>
+    <div class="app">
+      <div class="sidebar">
+        <div class="user-info">
+          <div class="user">
+            <img src="<%= me.avatar %>">
+            <h1><%= me.nickname %></h1>
+          </div>
+          <button class="button blue"><i>settings</i></button>
+        </div>
+        <div class="button-list">
+          <button class="button orange" id="score"><i>mode_heat</i> Loading...</button>   <button class="button purple"><i>add</i> Add</button>
+        </div>
+          <div class="contacts">
+            <% const filteredContacts = me.contacts.sort((a, b) => { let aContMsg; let bContMsg; try { aContMsg = messages[Array(me.username, a.username).sort().join('_')]; bContMsg = messages[Array(me.username, b.username).sort().join('_')]; return aContMsg[aContMsg.length - 1].timestamp > bContMsg[bContMsg.length - 1].timestamp } catch(err) { if (!aContMsg) { return -1 } else { if (!bContMsg) { return 1 } else { return 0} } } }).reverse() %>
+            <% filteredContacts.forEach(contact => { %>
+              <% console.log(contact) %>
+              <div class="contact">
+                <img src="<%= contact.avatar ? contact.avatar : 'Unknown' %>">
+                <div class="contact-info">
+                  <h1><%= contact.username ? contact.username : Unknown %></h1>
+                  <p><% contactMsgs = messages[Array(me.username, contact.username).sort().join('_')] %>
+                <% if (contactMsgs) { %>
+                  <% if (contactMsgs.length < 1) { %>
+ No messages in here, but you can change that!
+  <% } else { %>
+<% if(contactMsgs[contactMsgs.length - 1].username == me.username) { %>
+ You: <%= contactMsgs[contactMsgs.length - 1].content %>
+<% } else { %>
+  <%= contactMsgs[contactMsgs.length - 1].content %>
+<% } %> 
+  <% } %>
+  <% } %></p>
+                </div>
+              </div>
+              <div class="hhr"></div>
+              <% }); %>
+          </div>
+      </div>
+      <div class="messages">
+        <div class="row">
+                    <button class="button back blue"><i>arrow_back</i></button>
+
+        <div class="contact">
+          <img src="<%= user.avatar %>">
+          <div class="contact-info">
+            <h1><%= user.username %></h1>
+            <p>(statuses coming soon)</p>
+          </div>
+        </div>
+        </div>
+          <div class="msg-list">
+            
+          </div>
+          <form class="msg-box">
+            <a class="button blue" onclick="#"><i>add</i></a>
+            <input type="text" placeholder="Message <%= user.username %>...">
+            <button class="button purple"><i>send</i></button>
+            </form>
+         
+      </div>
+    </div>
+              <script>
+              setInterval(function(){
+              fetch('https://beta.eclipsechat.net/<%= me.username %>/getAllMessageGroups').then(res => res.text()).then(response => {
+                document.getElementById('score').innerHTML = `<i>mode_heat</i> ${response}`
+              })
+                }, 1000)
+                
+              async function test() {
+              let permission = await Notification.requestPermission();
+   if (Notification.permission === 'granted') {
+const greeting = new Notification('Eclipse',{
+  body: 'You have activated notifications!!! get notified for every new message :DD'
+});
+   }
+              }
+
+              test() 
+
+function addUser(me, user) {
+  console.log(user + 'hi')
+  fetch('/user/' + me + '/addContact/' + user).then(res => res.json()).then(response => {
+    if (response.error) {
+      alert('something wen\'t wrong. try again later.')
+    } else {
+      window.location.assign('/messages/' + user)
+    }
+  }) 
+}
+
+/*
+const contactInput = document.querySelector('#addUser')
+
+contactInput.addEventListener("keydown", e => enterEvent(e))
+
+function enterEvent(event){
+    if (event.keyCode == 13) {
+     addUser('<%= me.username %>', event.target.value) 
+    }
+}
+*/
+  const form = document.querySelector('.msg-box')
+  form.addEventListener('submit', function(e){
+    e.preventDefault()
+    const input = form.children[1]
+   if (input.value.trim() == "") return;
+     const messageID = new Array('<%= me.username %>', '<%= user.username %>').sort().join("_")
+    const msg = {
+     username: '<%= me.username %>',
+     avatar: '<%= me.avatar %>',
+      timestamp: Date.now(),
+     content: input.value.trim()
+    }
+  fetch('/messages/' + messageID + '/send', {
+  method: "POST",
+  headers: {
+    "Content-Type": 'application/json',
+    "Accept": "application/json"
+  },
+  body: JSON.stringify(msg)
+  })
+    input.value = ""
+  })
+
+  window.scrollTo(0,0);
+
+  
+ const scrollToBottom = (id) => {
+    const element = document.querySelector(id);
+    element.scrollTop = element.scrollHeight;
+}
+
+    scrollToBottom('.msg-list')
+    
+    
+
+    let oldMsgs;
+  
+  let i = 0;
+  setInterval(function(){
+    const messageID = new Array('<%= me.username %>', '<%= user.username %>').sort().join("_")
+  fetch('/getMessages/' + messageID).then(res => res.json()).then(msgs => {
+    
+    if (!oldMsgs) {
+    oldMsgs = [];
+    }
+
+    if (msgs.length > oldMsgs.length || !msgs.length == oldMsgs.length) {
+      if (document.hidden) {
+       document.title = `(${msgs.length - oldMsgs.length}) <%= user.username %> - Eclipse`
+      } else {
+    document.title = `<%= user.username %> - Eclipse`
+      }
+     
+              
+      const messagesDiv = document.querySelector('.msg-list')
+      messagesDiv.innerHTML = ""
+   
+    var i=0;
+    for (msg of msgs) {
+      if (msg.username == '<%= me.username %>') {
+  const replyInfo = { username: msg.username, content: msg.content }
+        
+ messagesDiv.innerHTML =  messagesDiv.innerHTML + `
+          <div class="outgoing">
+          <div class="bubble" onmouseover="this.innerHTML = '${msg.content}' + ' (${formatDate(new Date(msg.timestamp))}) '" onmouseout="this.innerHTML = '${msg.content}'">
+            <div class="content">${msg.content}</div>
+           
+          </div>
+        `
+      } else {
+       const replyInfo = { username: msg.username, content: msg.content }
+          
+ messagesDiv.innerHTML =  messagesDiv.innerHTML + `
+          <div class="incoming">
+          <div class="bubble" onmouseover="this.innerHTML = '${msg.content}' + ' (${formatDate(new Date(msg.timestamp))}) '" onmouseout="this.innerHTML = '${msg.content}'">
+            <div class="content">${msg.content}</div>
+           
+          </div>
+        `
+    }
+        }
+     scrollToBottom('.msg-list')
+     i += 1
+    }
+    
+     oldMsgs = msgs
+    })
+    
+  }, 300)
+
+               function formatDate(date) {
+  let result = null;
+  let now = new Date();
+  let differSec = (now - date) / 1000;
+
+  if (differSec < 1) return result = "right now";
+  if (differSec < 60) return result = `${Math.floor(differSec)} sec. ago`;
+  if (differSec < 3600) return result = `${Math.floor(differSec / 60)} min. ago`;
+  if (differSec >= 3600) {
+    const day = date.toLocaleString(window.navigator.language, {weekday: 'long', month: "long", day: "2-digit"});
+    const nowDay = now.toLocaleString(window.navigator.language, {weekday: 'long', month: "long", day: "2-digit"});
+    if (day === nowDay) {
+      const time = date.toLocaleString(window.navigator.language, {hour: "2-digit", minute: "2-digit"});
+      return result = "Today at " + time
+    } else {
+    return result = date.toLocaleString(window.navigator.language, {weekday: 'long', month: "long", day: "2-digit", hour: "2-digit", minute: "2-digit", day: "2-digit"});
+    }
+  };
+
+  return result;
+}
+
+              
+  const replyForm = document.querySelector('.msg-box')
+  replyForm.addEventListener('submit', function(e){
+    e.preventDefault()
+    console.log(replyForm)
+    const input = replyForm.children[2].children[0]
+    console.log(input)
+   if (input.value.trim() == "") return;
+     const messageID = new Array('<%= me.username %>', '<%= user.username %>').sort().join("_")
+     const usernameOfRepl = document.querySelector('.repl > .c > p > strong').innerText
+     console.log(usernameOfRepl)
+    const msg = {
+     username: '<%= me.username %>',
+     avatar: '<%= me.avatar %>',
+      timestamp: Date.now(),
+      repliedMessage: {
+        username: usernameOfRepl
+      },
+     content: input.value.trim()
+    }
+  fetch('/messages/' + messageID + '/send', {
+  method: "POST",
+  headers: {
+    "Content-Type": 'application/json',
+    "Accept": "application/json"
+  },
+  body: JSON.stringify(msg)
+  })
+    input.value = ""
+  })
+
+function setReplyInput(info) {
+  const form = document.querySelector('.msg-input')
+  
+  form.innerHTML = `
+  <span class="repl"><div class="c"><p>Replying to <strong>${info.username}</strong></p><div class="content">${info.content}</div></div><button onclick="reverseBack()"><i>close</i></button></span><br>
+  <div class="replying"> 
+      <input placeholder="Message <%= user.username %>">
+        <button><i>send</i>
+        </button>
+      
+  </div>
+  `
+}
+
+  
+
+function reverseBack(){
+  const form = document.querySelector('.msg-input')
+  form.innerHTML = `
+  <input>
+        <button><i>send</i></button>
+        `
+}
+            </script>
+
+          </body></html>
+          <% } else { %>
+            <html>
+  <head> 
+    <style>
+           @import "https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css";
+
+@import url("https://capnkitten.github.io/BetterDiscord/Themes/Material-Discord/css/fonts/google-sans.css");
+
+* {
+  font-family: "Google Sans";
+}
+
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+html,body {
+  overflow-x: hidden;
+  overflow-y:hidden;
+  max-width:100vw;
+}
+
+html {
+  height: -webkit-fill-available;
+}
+ 
+body,html {
+  background-color: #1f1f1f;
+}
+
+main {
+  height: 100vh;
+  height: -webkit-fill-available;
+  max-height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.dropdown-toggle { outline: 0; }
+
+.btn-toggle {
+  padding: .25rem .5rem;
+  font-weight: 600;
+  color: var(--bs-emphasis-color);
+  background-color: transparent;
+}
+.btn-toggle:hover,
+.btn-toggle:focus {
+  color: rgba(var(--bs-emphasis-color-rgb), .85);
+  background-color: var(--bs-tertiary-bg);
+}
+
+.btn-toggle::before {
+  width: 1.25em;
+  line-height: 0;
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+  transition: transform .35s ease;
+  transform-origin: .5em 50%;
+}
+
+[data-bs-theme="dark"] .btn-toggle::before {
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%28255,255,255,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+}
+
+.btn-toggle[aria-expanded="true"] {
+  color: rgba(var(--bs-emphasis-color-rgb), .85);
+}
+.btn-toggle[aria-expanded="true"]::before {
+  transform: rotate(90deg);
+}
+
+.btn-toggle-nav a {
+  padding: .1875rem .5rem;
+  margin-top: .125rem;
+  margin-left: 1.25rem;
+}
+.btn-toggle-nav a:hover,
+.btn-toggle-nav a:focus {
+  background-color: var(--bs-tertiary-bg);
+}
+
+.scrollarea {
+  overflow-y: auto;
+}
+
+
+.activee:focus {
+    color:#000;
+}
+
+i {
+  text-decoration:none;
+  font-style:normal;
+  font-family: "Material Symbols Rounded";
+}
+ 
+i.filled {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 600,
+  'GRAD' 200,
+  'opsz' 48
+}
+
+.nav-link {
+  gap:10px;
+  display:Flex;
+  align-items:center;
+}
+
+.activee {
+  background-color: #EAC9FF;
+  color:#000;
+}
+
+.nav-link:hover {
+  background-color: #6f42c1;
+    color:#FFF;
+}
+
+.nav-pills {
+  gap:5px;
+}
+
+.friendlist > .nav-item > .nav-link {
+  border-radius:20px;
+}
+
+.friendlist > .nav-item > .nav-link > .column > .frecon {
+  font-size:13px;
+}
+
+.friendlist > .nav-item > .nav-link > .column > .col {
+  display:flex;
+  align-items:flex-end;
+  gap:10px;
+}
+
+.frecon {
+  padding-top:7px;
+}
+
+.friendlist > .nav-item > .nav-link {
+  background-color: #1f1f1f;
+  color:#fff;
+}
+
+.friendlist > .nav-item > .activee {
+  background-color: #6f42c1; 
+  color: #fff;
+}
+
+.friendlist > .nav-item > .nav-link:hover {
+  background-color: #6f42c1; 
+  color: #fff;
+}
+
+
+/* Define a transition duration during page visits */
+html.is-changing .transition-fade {
+  transition: opacity 0.25s;
+  opacity: 1;
+}
+/* Define the styles for the unloaded pages */
+html.is-animating .transition-fade {
+  opacity: 0;
+}
+
+div.snb {
+    display:none;
+}
+
+.btn {
+  border-radius:50px;
+}
+
+      
+ @keyframes loading {
+  0% { 
+    transform: rotate(0); 
+  }
+  100% { 
+    transform: rotate(360deg);
+  }
+ }
+
+#arrow {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+#content {
+    padding: 20px;
+}
+
+input {
+ width: 100%;
+  border-radius:15px;
+  border:1px black solid;
+  padding:8px;
+}
+
+form {
+  display:flex;
+  gap:10px;
+  padding:0px;
+  z-index:999;
+  
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+}
+
+input:focus {
+  outline:none;
+}
+
+.chatbox {
+  height: 83vh;
+}
+
+.card {
+  border-radius:25px;
+  height:min-content;
+}
+
+
+.incoming, .outgoing {
+  display:flex;
+}
+
+.chatbox {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  width:100%;
+  min-height:80vh;
+  overflow-y: scroll;
+  max-width:100%;
+  padding-bottom:230px;
+}
+
+.chatbox > .col {
+  max-width:100%;
+}
+
+.incoming, .outgoing  {
+  justify-content: start;
+  max-width:100%;
+  width:auto;
+}
+
+      .incoming {
+        align-items:center;
+      }
+
+.outgoing {
+  justify-content: end;
+}
+
+.outgoing > .card {
+  text-align:right;
+}
+
+.monkey-color {
+  background-color: #2f2f2f;
+}
+
+.padding {
+  padding:10px;
+}
+
+.user {
+  display:flex;
+  align-items:center;
+  flex-direction:row;
+}
+
+      .input {
+        width:100%;
+        position:fixed;
+        bottom:12px;
+       
+      }
+      
+      .back > * {
+        text-decoration:none;
+        color:white;
+      }
+      
+       
+
+ 
+           </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  </head> 
+  <body>  
+    <!-- Vertically centered modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Create a new chat with a user!</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input placeholder="Enter username.." id="usr">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="addUser('<%= me.username %>', document.getElementById('usr').value)" data-bs-dismiss="modal">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div> <div class="d-flex row g-0 text-left justify-content-start">
+   
+    <div class="col msgs bg-dark text-light">
+      <div class="column">
+        <div class="col">
+          <!-- As a heading -->
+<nav class="navbar text-light monkey-color padding">
+  <div class="container-fluid">
+    <div class="column g-2  user">
+      <div class="col back">
+        <a href="/app"><i>arrow_back_ios</i></a>
+      </div>
+      
+    <a href="/users/<%= user.username %>" class="row g-2">
+            <div class="col">
+          <img class="rounded-circle" src="<%= user.avatar %>" width="30"> 
+      </div>
+      <div class="col">
+          <%= user.username %>
+            </div>
+    </a>
+          </div>
+  </div>
+</nav>
+        </div>
+        <div class="col chatbox" id="messages" style="padding:15px;">
+         
+        </div>
+        <div class="col input d-flex justify-content-center align-bottom">
+          <form action="#">
+          <input placeholder="Type a message..."><button class="btn d-flex justify-content-center align-items-center text-white" style="background-color: var(--bs-purple);"><i class="filled">send</i></button>
+          </form> 
+        </div>
+      </div>
+    </div>
+    </div>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+      </div>
+<script>
+  
+  /* global bootstrap: false */
+(() => {
+  'use strict'
+  const tooltipTriggerList = Array.from(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  tooltipTriggerList.forEach(tooltipTriggerEl => {
+    new bootstrap.Tooltip(tooltipTriggerEl)
+  })
+})()
+
+  function setElementDisplay() {
+    const screenWidth = window.innerWidth;
+    const onbElements = document.getElementsByClassName('onb');
+    const snbElements = document.getElementsByClassName('snb');
+
+    if (screenWidth < 950) {
+      // Screen width is under 554px
+      for (const onbElement of onbElements) {
+        onbElement.classList.remove('d-flex');
+        onbElement.classList.add('d-none');
+      }
+
+      for (const snbElement of snbElements) {
+        snbElement.classList.remove('d-none');
+        snbElement.classList.add('d-flex');
+      }
+    } else {
+      // Screen width is over 554px
+      for (const onbElement of onbElements) {
+        onbElement.classList.remove('d-none');
+        onbElement.classList.add('d-flex');
+      }
+
+      for (const snbElement of snbElements) {
+        snbElement.classList.remove('d-flex');
+        snbElement.classList.add('d-none');
+      }
+    }
+  }
+
+  // Run the function on initial load and whenever the window is resized
+  window.addEventListener('load', setElementDisplay);
+  window.addEventListener('resize', setElementDisplay);
+
+setInterval(setElementDisplay(), 0)
+
+function addUser(me, user) {
+  console.log(user)
+  fetch('/user/' + me + '/addContact/' + user).then(res => res.json()).then(response => {
+    if (response.error) {
+      alert('something wen\'t wrong. try again later.')
+    } else {
+      window.location.assign('/messages/' + user)
+    }
+  })
+}
+
+  const form = document.querySelector('form')
+  form.addEventListener('submit', function(e){
+    e.preventDefault()
+    const input = form.children[0]
+   if (input.value.trim() == "") return;
+     const messageID = new Array('<%= me.username %>', '<%= user.username %>').sort().join("_")
+    const msg = {
+     username: '<%= me.username %>',
+     avatar: '<%= me.avatar %>',
+     content: input.value.trim()
+    }
+  fetch('/messages/' + messageID + '/send', {
+  method: "POST",
+  headers: {
+    "Content-Type": 'application/json',
+    "Accept": "application/json"
+  },
+  body: JSON.stringify(msg)
+  })
+    input.value = ""
+  })
+
+  window.scrollTo(0,0);
+  
+  let oldMsgs;
+
+  let i = 0;
+  setInterval(function(){
+   const messageID = new Array('<%= me.username %>', '<%= user.username %>').sort().join("_")
+  fetch('/getMessages/' + messageID).then(res => res.json()).then(msgs => {
+    console.log(msgs.status)
+      
+     oldMsgs = msgs
+      const messagesDiv = document.querySelector('#messages')
+      messagesDiv.innerHTML = ""
+   
+    var i=0;
+    for (msg of msgs) {
+      if (msg.username == '<%= me.username %>') {
+      messagesDiv.innerHTML =  messagesDiv.innerHTML + `
+      <div class="row g-0 outgoing">
+         <div class="col-6 card">
+           <div class="card-body">
+            ${msg.content}
+           </div>
+            </div>
+          </div>
+      `
+      } else {
+        if (!msgs.length > 1) {
+ messagesDiv.innerHTML =  messagesDiv.innerHTML + `
+          <div class="row g-0 incoming">
+            <div class="col-2" style="width:45px;">
+              <a href="/users/<%= user.username %>"><img src="${msg.avatar}" class="rounded-circle" width="32"></a>
+            </div>
+         <div class="col-6 card">
+           <div class="card-body">
+            ${msg.content}
+           </div>
+            </div>
+          </div>
+        `
+    } else {
+         if (i == 0) {
+           if (msgs[i].username == msg.username) {
+   messagesDiv.innerHTML =  messagesDiv.innerHTML + `
+          <div class="row g-0 incoming">
+            <div class="col-2" style="width:45px;">
+              <a><img src="https://www.colorhexa.com/A12BFE.png" class="rounded-circle" width="32" height="32"></a>
+            </div>
+         <div class="col-6 card">
+           <div class="card-body">
+            ${msg.content}
+           </div>
+            </div>
+          </div>
+        `
+  } else {
+   messagesDiv.innerHTML =  messagesDiv.innerHTML + `
+          <div class="row g-0 incoming">
+            <div class="col-2" style="width:45px;">
+              <a href="/users/<%= user.username %>"><img src="${msg.avatar}" class="rounded-circle" width="32"></a>
+            </div>
+         <div class="col-6 card">
+           <div class="card-body">
+            ${msg.content}
+           </div>
+            </div>
+          </div>
+        `
+  }
+        } else {
+        if (msgs[i - 1].username == msg.username) {
+ messagesDiv.innerHTML =  messagesDiv.innerHTML + `
+          <div class="row g-0 incoming">
+            <div class="col-2" style="width:45px;">
+              <a><img src="https://www.colorhexa.com/A12BFE.png" class="rounded-circle" width="32" height="32"></a>
+            </div>
+         <div class="col-6 card">
+           <div class="card-body">
+            ${msg.content}
+           </div>
+            </div>
+          </div>
+        `
+  } else {
+   messagesDiv.innerHTML =  messagesDiv.innerHTML + `
+          <div class="row g-0 incoming">
+            <div class="col-2" style="width:45px;">
+              <a href="/users/<%= user.username %>"><img src="${msg.avatar}" class="rounded-circle" width="32"></a>
+            </div>
+         <div class="col-6 card">
+           <div class="card-body">
+            ${msg.content}
+           </div>
+            </div>
+          </div>
+        `
+  }
+          }
+        }
+    
+      }
+     i += 1
+  }
+    })
+  }, 500)
+
+
+</script>
+  </body>
+</html>
+  <% } %>

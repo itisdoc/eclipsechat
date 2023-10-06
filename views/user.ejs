@@ -1,0 +1,205 @@
+<html>
+  <head>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+* {
+  font-family: 'Archivo', 'Arial', sans-serif;
+}
+
+.username, .bio {
+  font-family: 'Inter', 'Archivo', 'Arial', sans-serif;
+}
+
+body {
+ margin:0;
+  background:url("https://i.ibb.co/0r8Ggg2/Screenshot-2023-08-09-7-09-07-PM.png");
+background-repeat:no-repeat;
+  background-size:cover;
+backdrop-filter: blur(20px);
+  width:100vw;
+  height:100vh;
+}
+
+.container {
+  display:flex;
+  justify-content:center;
+  flex-direction:row;
+  align-items:center;
+  vertical-align:middle;
+  height:100vh;
+  width:100vw;
+}
+
+.user-modal {
+  display:flex;
+  flex-direction:column;
+  width: 80vw;
+height: 80vh;
+flex-shrink: 0;
+border-radius: 40px;
+background: #0F0F0F;
+}
+
+.user-modal > * {
+  color:white;
+}
+
+.user-modal > .image {
+  width: 100%;
+height: 120px;
+flex-shrink: 0;
+  border-radius: 37.058px 37.058px 0px 0px;
+background: #303030 50% / cover no-repeat;
+}
+
+.avatar {
+  width: 92px;
+height: 92px;
+  border-radius: 92.644px;
+border: 5.632px solid #0F0F0F;
+background: lightgray;
+}
+
+.info {
+  display: flex;
+width: 100vw;
+height: 40vh;
+flex-direction: column;
+align-items: flex-start;
+gap: 23.161px;
+flex-shrink: 0;
+}
+
+.info > .avatar {
+  position:fixed;
+  left:15vw;
+  top:20vh;
+}
+
+.names {
+  line-height:0;
+  position:fixed;
+  top:37vh;
+  left:15vw;
+  display: flex;
+flex-direction: column;
+align-items: flex-start;
+}
+
+.username {
+  color:#606060;
+}
+
+
+.allb {
+  position:fixed;
+  top:52vh;
+  left:15vw;
+  display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 7.692px;
+align-self: stretch;
+}
+
+.bio-tag {
+  display:flex;
+  justify-content:center;
+  border-radius: 20px;
+background: #272727;
+ width: 43.68px;
+height: 16px;
+flex-shrink: 0;
+  padding:5px;
+  font-family: 'Archivo', 'Inter', 'Arial', sans-serif;
+  font-weight:bold;
+}
+
+.button {
+ display: flex;
+width: 55%;
+height: 60.232px;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 0.926px;
+flex-shrink: 0;
+  position:fixed;
+  bottom:13%;
+  left:22.5%;
+
+border-radius: 37.058px;
+background: #BA63FF;
+}
+      
+      .button {
+        color: #FFF;
+font-family: Archivo;
+font-size: 18.529px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+        text-decoration:none;
+        transition: all .2s ease-in-out; 
+      }
+      
+      .button:hover {
+        transform:scale(1.03);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+    <div class="user-modal">
+      <div class="image" <% if (user.banner) { %>style="background: url('<%= user.banner %>'); background-size:cover;background-position:center;background-repeat:no-repeat;"<% } %>>
+      </div>
+      <div class="info">
+      <div class="avatar" <% if (user.avatar == "") { %>style="background: url('https://i.ibb.co/414YQvv/image.png'); background-size:contain;"<% } else { %> style="background: url('<%= user.avatar %>'); background-size:contain;"<% } %>>
+        
+      </div>
+        <div class="names">
+          <h1><%= user.nickname %></h1>
+          <p class="username">@<%= user.username %></p>
+        </div>
+          <div class="allb">
+            <span class="bio-tag">Bio</span>
+          <div class="bio">
+            <%= user.bio %>
+          </div>
+          </div>
+        <% if (me.contacts.filter(c => c.username == user.username).length > 0) { %>
+<a href="/messages/<%= user.username %>" class="button">
+              Go to contact
+              </a>
+          <% } else { %>
+            <% if (user.username == me.username) { %>
+                 <a href="#" onclick="window.history.back()" class="button">
+              Go back
+              </a>
+              <% } else { %>
+                
+                  <a href="#" onclick="addUser('<%= me.username %>', '<%= user.username %>')" class="button">
+              Add <%= user.nickname %> to your contacts
+              </a>
+                <% } %>
+            <% } %>
+      </div>
+    </div>
+    </div>
+        <script>
+          
+function addUser(me, user) {
+  console.log(user)
+  fetch('/user/' + me + '/addContact/' + user).then(res => res.json()).then(response => {
+    if (response.error) {
+      alert('something wen\'t wrong. try again later. REASON: ' + response.error)
+    } else {
+      window.location.assign('/messages/' + user)
+    }
+  })
+}
+        </script>
+  </body>
+</html>

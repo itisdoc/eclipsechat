@@ -1,0 +1,393 @@
+<html lang="en-US">
+  <head>
+     <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eclipse - Login</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+      
+      #signTxt {
+        color: #252525;
+        text-decoration:none;
+      }
+
+* {
+  font-family: 'Archivo', 'Arial', sans-serif;
+}
+
+body, html {
+  background-color: #f5f5f5;
+  margin:0;
+  padding:0;
+}
+
+.app {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  width:100vw;
+}
+
+.container {
+  background-color:#EFE4F8;
+  color:#2f2f2f;
+  width:40vw;
+  max-height:80vh;
+  padding:30px;
+  border-radius:9.75px;
+  
+    -webkit-transition: width 0.3s ease-in;
+    -moz-transition: width 0.3s ease-in;
+    -o-transition: width 0.3s ease-in;
+    transition: width 0.3s ease-in;
+}
+
+@media only screen and (max-width:759px) {
+  .container {
+    width:80vw;
+  } 
+}
+
+.container > h1 {
+  font-size:32px;
+}
+
+
+@media only screen and (min-width:400px) {
+  span {
+    line-height:0.5;
+  }
+}
+
+@media only screen and (max-width:399px) {
+  span {
+        line-height:1;
+  }
+}
+
+
+i {
+  text-decoration:none;
+  font-style:normal;
+  font-family: "Material Symbols Rounded";
+}
+ 
+i.filled {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 600,
+  'GRAD' 200,
+  'opsz' 48
+}
+
+.input {
+  
+ background-color:#fff;
+  /* This bit sets up the horizontal layout */
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  padding:15px;
+  padding-right:20px;
+  
+  border-radius:9.75px;
+  
+  /* This bit draws the box around it */
+  border:1px solid grey;
+
+  /* I've used padding so you can see the edges of the elements. */
+  padding:1px;
+}
+
+input {
+  /* Tell the input to use all the available space */
+  flex-grow:2;
+  /* And hide the input's outline, so the form looks like the outline */
+  border:none;
+  padding:15px;
+  border-radius:9.75px;
+}
+
+/* remove the input focus blue box, it will be in the wrong place. */
+input:focus {
+  outline: none;
+}
+
+.input > a {
+  margin-right:10px;
+}
+
+/* Add the focus effect to the form so it contains the button */
+.input:focus-within { 
+  outline: 1px solid blue 
+}
+
+
+#signupForm {
+  display:none;
+}
+
+#loginForm {
+  display:block;
+}
+
+brm {
+  display: block;
+            margin-bottom: 0.4em;
+}
+
+button {
+  padding:12px;
+  border-radius:50px;
+  border-style:none;
+  background-color: #181818;
+  color:#fff;
+}
+
+button:hover {
+  background-color:#404040;
+ transform:scale(1.02);
+}
+
+button {
+  width:100%;
+}
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <div class="container">
+        <img src="https://i.ibb.co/rbrqvWg/output-onlinepngtools-1.png" width="100"></img>
+        <span>
+        <h1>Welcome to Eclipse</h1>
+        <p id="login-text">Log in to get started!</p>
+          </span><br>
+        <form id="loginForm" style="display:block;">
+          <div class="input">
+          <input placeholder="Email/Username" type="text"required oninput="checkEmail(this, document.getElementById('checked'))">
+            <a><i id="checked" class="filled"></i></a>
+          </div> <brm></brm>
+          <div class="input">
+          <input placeholder="Password" required type="password">
+            <a onclick="showInput(this.parentNode.children[0],this.parentNode.children[1].children[0])"><i id="checked" class="filled">visibility</i></a>
+          </div>  <brm></brm>
+          <button type="submit">Login</button>
+        </form>
+        <form id="signupForm" style="display:none;">
+            <div class="input">
+          <input placeholder="Email/Username" type="text" required oninput="checkEmail(this, document.getElementById('checked6'))">
+            <a><i id="checked6" class="filled"></i></a>
+          </div> <brm></brm>
+            <div class="input">
+          <input placeholder="Username" type="text"required oninput="checkUsername(this, document.getElementById('checked8'))">
+            <a><i id="checked8" class="filled"></i></a>
+          </div> <brm></brm>
+           <div class="input">
+          <input placeholder="Nickname" type="text"required oninput="checkNickname(this, document.getElementById('checked2'))">
+            <a><i id="checked2" class="filled"></i></a>
+          </div>
+          <brm></brm>
+          <div class="input">
+          <input placeholder="Password" required type="password">
+            <a onclick="showInput(this.parentNode.children[0],this.parentNode.children[1].children[0])"><i id="checked" class="filled">visibility</i></a>
+          </div>  <brm></brm>
+          <p style="font-size:12px;">See anything missing from this page? Other settings like avatars and bios are available in the settings page.</p>
+           <brm></brm>
+            <button type="submit">Signup</button>
+        </form><br>
+        <a href="#" id="signTxt" onclick="changeForm(this)">Nevermind, signup!</a> 
+      </div> 
+    </div>
+  <script>
+    const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+const userRegex = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,15}$/igm
+const nickRegex = /^[a-zA-Z0-9_\-.!|$|+|\ ]{0,15}$/g
+
+
+
+      const loginForm = document.getElementById("loginForm");
+      const signupForm = document.getElementById("signupForm");
+
+function checkEmail(input, checked) {
+  if (!input.value.trim() == "") {
+    console.log(input.value.trim())
+    if (input.value.trim().match(userRegex)) {
+    
+      checked.innerText = "person"   
+     checked.style.color = "#000"
+    } else {
+    if (input.value.trim().match(regex)) {
+      checked.innerText = "check_circle"   
+     checked.style.color = "#48FF5B" 
+    } else {
+          checked.innerText = "cancel"
+    checked.style.color = "#FF4848" 
+      
+    }
+      }
+  } else {
+    checked.innerText = ""
+    
+  }
+}
+    function checkUsername(input, checked) {
+  
+      input.setAttribute('type', 'text')
+  if (!input.value.trim() == "") {
+    console.log(input.value.trim())
+    if (input.value.trim().match(userRegex)) {
+    
+      checked.innerText = "person"   
+     checked.style.color = "#000"
+    } else {
+        checked.innerText = "cancel"
+    checked.style.color = "#FF4848" 
+    }
+  } else {
+    checked.innerText = ""
+  
+  }
+  input.selectionStart = input.selectionEnd = input.value.length;
+}
+
+// Basic cross browser addEvent
+function addEvent(elem, event, fn){
+if(elem.addEventListener){
+  elem.addEventListener(event, fn, false);
+}else{
+  elem.attachEvent("on" + event,
+  function(){ return(fn.call(elem, window.event)); });
+}}
+    
+
+function checkNickname(input, checked) {
+  
+      input.setAttribute('type', 'text')
+  if (!input.value.trim() == "") {
+    console.log(input.value.trim())
+    if (input.value.trim().match(nickRegex)) {
+      checked.innerText = "check_circle"   
+     checked.style.color = "#48FF5B" 
+    } else {
+          checked.innerText = "cancel"
+    checked.style.color = "#FF4848" 
+  
+    }
+  } else {
+    checked.innerText = ""
+    
+        input.setAttribute('type', 'email')
+  }
+  input.selectionStart = input.selectionEnd = input.value.length;
+}
+
+function changeForm(text) {
+  const signup = document.querySelectorAll('form')[1]
+    const login = document.querySelectorAll('form')[0]
+    if (signup.getAttribute('style') == "display:none;") {
+    
+      login.setAttribute('style', "display:none;")
+      signup.setAttribute('style', "display:block;")
+      text.innerText = "Nevermind, login!"
+      document.getElementById('login-text').innerHTML = "Sign up to get started!"
+    } else {
+      signup.setAttribute('style', "display:none;")
+      login.setAttribute('style', "display:block;")
+        text.innerText = "Nevermind, signup!"
+      document.getElementById('login-text').innerHTML = "Log in to get started!"
+    }
+  
+}
+
+function showInput(input, icon) {
+  if (input.type == "password") {
+    input.setAttribute('type','text')
+   
+    icon.innerText = "visibility_off"
+  } else {
+    input.setAttribute('type','password')
+     icon.innerHTML = "visibility"
+    icon.classList.add('filled')
+  }
+}
+
+function handleFormSubmit(event, endpoint) {
+  event.preventDefault();
+  console.log(event.target.children)
+ const userOrEmail = event.target.children[0].children[0]
+  let formData;
+  let password = event.target.children[2].children[0].value
+  console.log(endpoint)
+  if (endpoint == "/signup") {
+    if (event.target.children[0].children[1].innerText == "cancel") {
+    return alert('Please enter a valid email')
+    }
+ if (userOrEmail.value.trim().match(userRegex)) {
+  return alert('Please enter a valid email for the signup.')  
+ } else {
+   
+   let username = event.target.children[2].children[0].value
+   if (event.target.children[2].children[1].innerText == "cancel") return alert('Your username should be 3-15 characters with only special characters like underscores and dots permitted.')
+   let nickname = event.target.children[4].children[0].value
+   let password = event.target.children[6].children[0].value
+   
+  formData = {
+    email: userOrEmail.value.trim(),
+    username: username,
+    password:password,
+    avatar: "https://i.ibb.co/414YQvv/image.png",
+    nickname: nickname
+  }
+ }
+  } else {
+     let email;
+ let username;
+ if (userOrEmail.value.trim().match(userRegex)) {
+   email = null
+   username = userOrEmail.value.trim()
+ } else {
+   username = null
+  email = userOrEmail.value.trim()
+ }
+    
+    if (event.target.children[0].children[1].innerText == "cancel") {
+    return alert('Please enter a valid email')
+    }
+    formData = {
+      username: username,
+      email:email,
+      password: password
+    }
+  }
+ console.log(formData)
+  
+  fetch(endpoint, {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json'
+  },
+    body: JSON.stringify(formData)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.message) {
+      alert(data.message);
+    } else {
+      window.location.href = '/app';
+    }
+  })  
+  .catch(error => {
+    alert('An error occurred. Please try again later.');
+    console.error('Error:', error);
+  });
+}
+
+
+
+loginForm.addEventListener('submit', (event) => handleFormSubmit(event, '/login'));
+signupForm.addEventListener('submit', (event) => handleFormSubmit(event, '/signup'));
+  </script>
+  </body>
+</html> 

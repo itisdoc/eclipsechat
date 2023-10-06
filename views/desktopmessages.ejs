@@ -1,0 +1,1120 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Eclipse - <%= user.username %></title>
+<% if (is_desktop == true) { %>
+<html>
+  <head> 
+    <style>
+           @import "https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css";
+
+@import url("https://capnkitten.github.io/BetterDiscord/Themes/Material-Discord/css/fonts/google-sans.css");
+
+* {
+  font-family: "Google Sans";
+}
+
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+html,body {
+  overflow-x: hidden;
+  overflow-y:hidden;
+  max-width:100vw;
+}
+
+html {
+  height: -webkit-fill-available;
+}
+ 
+body,html {
+  background-color: #1f1f1f;
+}
+
+main {
+  height: 100vh;
+  height: -webkit-fill-available;
+  max-height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+
+
+.noscroll {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+.noscroll::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+      
+.dropdown-toggle { outline: 0; }
+
+.btn-toggle {
+  padding: .25rem .5rem;
+  font-weight: 600;
+  color: var(--bs-emphasis-color);
+  background-color: transparent;
+}
+.btn-toggle:hover,
+.btn-toggle:focus {
+  color: rgba(var(--bs-emphasis-color-rgb), .85);
+  background-color: var(--bs-tertiary-bg);
+}
+
+.btn-toggle::before {
+  width: 1.25em;
+  line-height: 0;
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+  transition: transform .35s ease;
+  transform-origin: .5em 50%;
+}
+
+[data-bs-theme="dark"] .btn-toggle::before {
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%28255,255,255,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+}
+
+.btn-toggle[aria-expanded="true"] {
+  color: rgba(var(--bs-emphasis-color-rgb), .85);
+}
+.btn-toggle[aria-expanded="true"]::before {
+  transform: rotate(90deg);
+}
+
+.btn-toggle-nav a { 
+  padding: .1875rem .5rem;
+  margin-top: .125rem;
+  margin-left: 1.25rem;
+}
+.btn-toggle-nav a:hover,
+.btn-toggle-nav a:focus {
+  background-color: var(--bs-tertiary-bg);
+}
+
+.scrollarea {
+  overflow-y: auto;
+}
+
+
+.activee:focus {
+    color:#000;
+}
+
+i {
+  text-decoration:none;
+  font-style:normal;
+  font-family: "Material Symbols Rounded";
+}
+ 
+i.filled {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 600,
+  'GRAD' 200,
+  'opsz' 48
+}
+
+.nav-link {
+  gap:10px;
+  display:Flex;
+  align-items:center;
+}
+
+.activee {
+  background-color: #EAC9FF;
+  color:#000;
+}
+
+.nav-link:hover {
+  background-color: #6f42c1;
+    color:#FFF;
+}
+
+.nav-pills {
+  gap:5px;
+}
+
+.friendlist > .nav-item > .nav-link {
+  border-radius:20px;
+}
+
+.friendlist > .nav-item > .nav-link > .column > .frecon {
+  font-size:13px;
+}
+
+.friendlist > .nav-item > .nav-link > .column > .col {
+  display:flex;
+  align-items:flex-end;
+  gap:10px;
+}
+
+.frecon {
+  padding-top:7px;
+}
+
+.friendlist > .nav-item > .nav-link {
+  background-color: #dfdfdf;
+  color:#000;
+}
+
+.friendlist > .nav-item > .activee {
+  background-color: #6f42c1; 
+  color: #fff;
+}
+
+.friendlist > .nav-item > .nav-link:hover {
+  background-color: #6f42c1; 
+  color: #fff;
+}
+
+
+/* Define a transition duration during page visits */
+html.is-changing .transition-fade {
+  transition: opacity 0.25s;
+  opacity: 1;
+}
+/* Define the styles for the unloaded pages */
+html.is-animating .transition-fade {
+  opacity: 0;
+}
+
+div.snb {
+    display:none;
+}
+
+.btn {
+  border-radius:50px;
+}
+
+input {
+ width: 100%;
+  border-radius:15px;
+  border:1px black solid;
+  padding:8px;
+}
+
+form {
+  display:flex;
+  gap:10px;
+  padding:0px;
+  z-index:999;
+  
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+}
+
+input:focus {
+  outline:none;
+}
+
+.chatbox {
+  height: 83vh;
+}
+
+.card {
+  border-radius:25px;
+  height:min-content;
+}
+
+
+.incoming, .outgoing {
+  display:flex;
+}
+
+.chatbox {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  width:100%;
+  min-height:80vh;
+  background:none;
+  backdrop-filter: blur(2px);
+  overflow-y: scroll;
+  max-width:100%;
+  padding-bottom:540px;
+}
+
+.chatbox > .col {
+  max-width:100%;
+}
+
+.incoming, .outgoing  {
+  justify-content: start;
+  max-width:100%;
+  width:auto;
+}
+
+      .incoming {
+        align-items:center;
+      }
+
+.outgoing {
+  justify-content: end;
+}
+
+.outgoing > .card {
+  text-align:right;
+}
+
+.monkey-color {
+  background-color: #AF53F7;
+}
+
+.padding {
+  padding:10px;
+}
+
+.user {
+  display:flex;
+  align-items:center;
+  flex-direction:row;
+}
+
+      .input {
+      position:fixed;
+        bottom:5px;
+        width:70%;
+      }
+
+
+ 
+           </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  </head> 
+  <body>  
+    <!-- Vertically centered modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Create a new chat with a user!</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input placeholder="Enter username.." id="usr">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="addUser('<%= me.username %>', document.getElementById('usr').value)" data-bs-dismiss="modal">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div> <div class="d-flex row g-1 text-left justify-content-start">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-dark bg-light border-end navbar-expand-sm onb navbb"  style="width: 250px;height:100vh;justify-content:center;gap:5px;">
+    <a href="/" class="d-flex align-items-left mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+     <img src="https://i.ibb.co/rbrqvWg/output-onlinepngtools-1.png" width="100" alt="LOGO"> 
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a href="/app" class="nav-link text-dark" aria-current="page">
+          <i class="filled">home</i> 
+          
+          Home
+        </a>
+      </li>
+      <li>
+        <a href="/servers" class="nav-link text-dark">
+         <i class="filled">groups</i>
+          
+          Servers
+        </a>
+      </li>
+      
+    </ul>
+      <br><br>
+    <div class="noscroll" style="width:100%;height:100vh;overflow-y:scroll;overflow-x:hidden;margin:0;">
+    <ul class="nav nav-pills friendlist flex-column mb-auto">
+      <% me.contacts.forEach(contact => { %>
+        <% if (me !== null && user.username == contact.username) { %>
+      <li class="nav-item" style="max-width:100%;display:flex;align-items:center;"> 
+        <a href="#" class="nav-link activee" aria-current="page" style="max-width:100%;display:flex;align-items:center;">
+          <div class="column" style="max-width:100%;display:flex;align-items:center;">
+            <div class="col d-flex" style="max-width:100%;display:flex;align-items:center;">
+          <img class="rounded-circle" src="<%= contact.avatar %>" width="30"> 
+          <%= contact.username %>
+            </div>
+          </div>
+        </a>
+      </li>
+          <% } else { %>
+      <li class="nav-item" style="max-width:100%;display:flex;align-items:center;">
+        <a href="/messages/<%= contact.username %>" class="nav-link" aria-current="page" style="max-width:100%;display:flex;align-items:center;">
+          <div class="column" style="max-width:100%;display:flex;align-items:center;">
+            <div class="col" style="max-width:100%;display:flex;align-items:center;">
+          <img class="rounded-circle" src="<%= contact.avatar %>" width="30"> 
+          <%= contact.username %>
+            </div>
+          </div>
+        </a>
+      </li>
+            <% } %>
+        <% }); %>
+    </ul><br>
+                  <a class="d-flex align-items-center justify-content-center btn text-light btn-primary col" href="#" style="width:auto;display:flex;gap:5px;" data-bs-toggle="modal" data-bs-target="#myModal"><i>add</i> New Message</a>
+  </div> 
+    <hr>
+    <div class="dropdown">
+      <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="<%= me.avatar %>" alt="" width="32" height="32" class="rounded-circle me-2">
+        <strong><%= me.username %></strong>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-light text-small shadow">
+        <li><a class="dropdown-item" href="/users/<%= me.username %>">Profile</a></li>
+        <li><a class="dropdown-item" href="/settings">Settings</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="/logout">Sign out</a></li>
+      </ul>
+    </div>
+  </div>
+    <div class="col msgs text-dark" style="background-color: #A12BFE;">
+      <div class="column">
+        <div class="col">
+          <!-- As a heading -->
+<nav class="navbar text-dark padding" style="color:black;background-color:#AF53F7;">
+  <div class="container-fluid">
+    <a href="/users/<%= user.username %>" style="color:black;text-decoration:none;">
+    <div class="row g-2  user">
+            <div class="col">
+          <img class="rounded-circle" src="<%= user.avatar %>" width="30"> 
+      </div>
+      <div class="col">
+          <%= user.username %>
+            </div>
+          </div>
+    </a>
+  </div>
+</nav>
+        </div>
+        <div class="col chatbox" id="messages" style="padding:15px;">
+         
+        </div>
+        <div class="col input d-flex justify-content-center align-bottom">
+          <form action="#">
+          <input placeholder="Type a message..."><button class="btn d-flex justify-content-center align-items-center text-white" style="background-color: var(--bs-purple);"><i class="filled">send</i></button>
+          </form> 
+        </div>
+      </div>
+    </div>
+    </div>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+      </div>
+          <script>
+            
+  
+  /* global bootstrap: false */
+(() => {
+  'use strict'
+  const tooltipTriggerList = Array.from(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  tooltipTriggerList.forEach(tooltipTriggerEl => {
+    new bootstrap.Tooltip(tooltipTriggerEl)
+  })
+})()
+
+
+function addUser(me, user) {
+  console.log(user)
+  fetch('/user/' + me + '/addContact/' + user).then(res => res.json()).then(response => {
+    if (response.error) {
+      alert('something wen\'t wrong. try again later.')
+    } else {
+      window.location.assign('/messages/' + user)
+    }
+  })
+}
+
+  const form = document.querySelector('form')
+  form.addEventListener('submit', function(e){
+    e.preventDefault()
+    const input = form.children[0]
+   if (input.value.trim() == "") return;
+     const messageID = new Array('<%= me.username %>', '<%= user.username %>').sort().join("_")
+    const msg = {
+     username: '<%= me.username %>',
+     avatar: '<%= me.avatar %>',
+     content: input.value.trim()
+    }
+  fetch('/messages/' + messageID + '/send', {
+  method: "POST",
+  headers: {
+    "Content-Type": 'application/json',
+    "Accept": "application/json"
+  },
+  body: JSON.stringify(msg)
+  })
+    input.value = ""
+  })
+
+  window.scrollTo(0,0);
+
+  
+ const scrollToBottom = (id) => {
+    const element = document.getElementById(id);
+    element.scrollTop = element.scrollHeight;
+}
+
+    scrollToBottom('messages')
+    
+    
+
+  let oldMsgs;
+
+  
+  let i = 0;
+  setInterval(function(){
+   const messageID = new Array('<%= me.username %>', '<%= user.username %>').sort().join("_")
+  fetch('/getMessages/' + messageID).then(res => res.json()).then(msgs => {
+    console.log(msgs.status)
+      
+     oldMsgs = msgs
+      const messagesDiv = document.querySelector('#messages')
+      messagesDiv.innerHTML = ""
+   
+    var i=0;
+    for (msg of msgs) {
+      if (msg.username == '<%= me.username %>') {
+      messagesDiv.innerHTML =  messagesDiv.innerHTML + `
+      <div class="row g-0 outgoing">
+         <div class="col-6 card">
+           <div class="card-body">
+            ${msg.content}
+           </div>
+            </div>
+          </div>
+      `
+      } else {
+        if (msgs.length == 1) {
+ messagesDiv.innerHTML =  messagesDiv.innerHTML + `
+          <div class="row g-0 incoming">
+            <div class="col-2" style="width:45px;">
+              <a href="/users/<%= user.username %>"><img src="${msg.avatar}" class="rounded-circle" width="32"></a>
+            </div>
+         <div class="col-6 card">
+           <div class="card-body">
+            ${msg.content}
+           </div>
+            </div>
+          </div>
+        `
+    } else {
+        if (i == 0) {
+           if (msgs[i].username == msg.username) {
+   messagesDiv.innerHTML =  messagesDiv.innerHTML + `
+          <div class="row g-0 incoming">
+            <div class="col-2" style="width:45px;">
+              <a><img src="https://www.colorhexa.com/A12BFE.png" class="rounded-circle" width="32" height="32"></a>
+            </div>
+         <div class="col-6 card">
+           <div class="card-body">
+            ${msg.content}
+           </div>
+            </div>
+          </div>
+        `
+  } else {
+   messagesDiv.innerHTML =  messagesDiv.innerHTML + `
+          <div class="row g-0 incoming">
+            <div class="col-2" style="width:45px;">
+              <a href="/users/<%= user.username %>"><img src="${msg.avatar}" class="rounded-circle" width="32"></a>
+            </div>
+         <div class="col-6 card">
+           <div class="card-body">
+            ${msg.content}
+           </div>
+            </div>
+          </div>
+        `
+  }
+        } else {
+        if (msgs[i - 1].username == msg.username) {
+ messagesDiv.innerHTML =  messagesDiv.innerHTML + `
+          <div class="row g-0 incoming">
+            <div class="col-2" style="width:45px;">
+              <a><img src="https://www.colorhexa.com/A12BFE.png" class="rounded-circle" width="32" height="32"></a>
+            </div>
+         <div class="col-6 card">
+           <div class="card-body">
+            ${msg.content}
+           </div>
+            </div>
+          </div>
+        `
+  } else {
+   messagesDiv.innerHTML =  messagesDiv.innerHTML + `
+          <div class="row g-0 incoming">
+            <div class="col-2" style="width:45px;">
+              <a href="/users/<%= user.username %>"><img src="${msg.avatar}" class="rounded-circle" width="32"></a>
+            </div>
+         <div class="col-6 card">
+           <div class="card-body">
+            ${msg.content}
+           </div>
+            </div>
+          </div>
+        `
+  }
+          }
+        }
+    
+      }
+     i += 1
+  }
+    })
+  }, 500)
+
+          </script>
+  </body>
+</html>
+          <% } else { %>
+            <html>
+  <head> 
+    <style>
+           @import "https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css";
+
+@import url("https://capnkitten.github.io/BetterDiscord/Themes/Material-Discord/css/fonts/google-sans.css");
+
+* {
+  font-family: "Google Sans";
+}
+
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+html,body {
+  overflow-x: hidden;
+  overflow-y:hidden;
+  max-width:100vw;
+}
+
+html {
+  height: -webkit-fill-available;
+}
+ 
+body,html {
+  background-color: #1f1f1f;
+}
+
+main {
+  height: 100vh;
+  height: -webkit-fill-available;
+  max-height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.dropdown-toggle { outline: 0; }
+
+.btn-toggle {
+  padding: .25rem .5rem;
+  font-weight: 600;
+  color: var(--bs-emphasis-color);
+  background-color: transparent;
+}
+.btn-toggle:hover,
+.btn-toggle:focus {
+  color: rgba(var(--bs-emphasis-color-rgb), .85);
+  background-color: var(--bs-tertiary-bg);
+}
+
+.btn-toggle::before {
+  width: 1.25em;
+  line-height: 0;
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+  transition: transform .35s ease;
+  transform-origin: .5em 50%;
+}
+
+[data-bs-theme="dark"] .btn-toggle::before {
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%28255,255,255,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+}
+
+.btn-toggle[aria-expanded="true"] {
+  color: rgba(var(--bs-emphasis-color-rgb), .85);
+}
+.btn-toggle[aria-expanded="true"]::before {
+  transform: rotate(90deg);
+}
+
+.btn-toggle-nav a {
+  padding: .1875rem .5rem;
+  margin-top: .125rem;
+  margin-left: 1.25rem;
+}
+.btn-toggle-nav a:hover,
+.btn-toggle-nav a:focus {
+  background-color: var(--bs-tertiary-bg);
+}
+
+.scrollarea {
+  overflow-y: auto;
+}
+
+
+.activee:focus {
+    color:#000;
+}
+
+i {
+  text-decoration:none;
+  font-style:normal;
+  font-family: "Material Symbols Rounded";
+}
+ 
+i.filled {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 600,
+  'GRAD' 200,
+  'opsz' 48
+}
+
+.nav-link {
+  gap:10px;
+  display:Flex;
+  align-items:center;
+}
+
+.activee {
+  background-color: #EAC9FF;
+  color:#000;
+}
+
+.nav-link:hover {
+  background-color: #6f42c1;
+    color:#FFF;
+}
+
+.nav-pills {
+  gap:5px;
+}
+
+.friendlist > .nav-item > .nav-link {
+  border-radius:20px;
+}
+
+.friendlist > .nav-item > .nav-link > .column > .frecon {
+  font-size:13px;
+}
+
+.friendlist > .nav-item > .nav-link > .column > .col {
+  display:flex;
+  align-items:flex-end;
+  gap:10px;
+}
+
+.frecon {
+  padding-top:7px;
+}
+
+.friendlist > .nav-item > .nav-link {
+  background-color: #1f1f1f;
+  color:#fff;
+}
+
+.friendlist > .nav-item > .activee {
+  background-color: #6f42c1; 
+  color: #fff;
+}
+
+.friendlist > .nav-item > .nav-link:hover {
+  background-color: #6f42c1; 
+  color: #fff;
+}
+
+
+/* Define a transition duration during page visits */
+html.is-changing .transition-fade {
+  transition: opacity 0.25s;
+  opacity: 1;
+}
+/* Define the styles for the unloaded pages */
+html.is-animating .transition-fade {
+  opacity: 0;
+}
+
+div.snb {
+    display:none;
+}
+
+.btn {
+  border-radius:50px;
+}
+
+      
+ @keyframes loading {
+  0% { 
+    transform: rotate(0); 
+  }
+  100% { 
+    transform: rotate(360deg);
+  }
+ }
+
+#arrow {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+#content {
+    padding: 20px;
+}
+
+input {
+ width: 100%;
+  border-radius:15px;
+  border:1px black solid;
+  padding:8px;
+}
+
+form {
+  display:flex;
+  gap:10px;
+  padding:0px;
+  z-index:999;
+  
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+}
+
+input:focus {
+  outline:none;
+}
+
+.chatbox {
+  height: 83vh;
+}
+
+.card {
+  border-radius:25px;
+  height:min-content;
+}
+
+
+.incoming, .outgoing {
+  display:flex;
+}
+
+.chatbox {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  width:100%;
+  min-height:80vh;
+  overflow-y: scroll;
+  max-width:100%;
+  padding-bottom:230px;
+}
+
+.chatbox > .col {
+  max-width:100%;
+}
+
+.incoming, .outgoing  {
+  justify-content: start;
+  max-width:100%;
+  width:auto;
+}
+
+      .incoming {
+        align-items:center;
+      }
+
+.outgoing {
+  justify-content: end;
+}
+
+.outgoing > .card {
+  text-align:right;
+}
+
+.monkey-color {
+  background-color: #2f2f2f;
+}
+
+.padding {
+  padding:10px;
+}
+
+.user {
+  display:flex;
+  align-items:center;
+  flex-direction:row;
+}
+
+      .input {
+        width:100%;
+        position:fixed;
+        bottom:12px;
+       
+      }
+      
+      .back > * {
+        text-decoration:none;
+        color:white;
+      }
+      
+       
+
+ 
+           </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  </head> 
+  <body>  
+    <!-- Vertically centered modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Create a new chat with a user!</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input placeholder="Enter username.." id="usr">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="addUser('<%= me.username %>', document.getElementById('usr').value)" data-bs-dismiss="modal">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div> <div class="d-flex row g-0 text-left justify-content-start">
+   
+    <div class="col msgs bg-dark text-light">
+      <div class="column">
+        <div class="col">
+          <!-- As a heading -->
+<nav class="navbar text-light monkey-color padding">
+  <div class="container-fluid">
+    <div class="column g-2  user">
+      <div class="col back">
+        <a href="/app"><i>arrow_back_ios</i></a>
+      </div>
+      
+    <a href="/users/<%= user.username %>" class="row g-2">
+            <div class="col">
+          <img class="rounded-circle" src="<%= user.avatar %>" width="30"> 
+      </div>
+      <div class="col">
+          <%= user.username %>
+            </div>
+    </a>
+          </div>
+  </div>
+</nav>
+        </div>
+        <div class="col chatbox" id="messages" style="padding:15px;">
+         
+        </div>
+        <div class="col input d-flex justify-content-center align-bottom">
+          <form action="#">
+          <input placeholder="Type a message..."><button class="btn d-flex justify-content-center align-items-center text-white" style="background-color: var(--bs-purple);"><i class="filled">send</i></button>
+          </form> 
+        </div>
+      </div>
+    </div>
+    </div>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+      </div>
+<script>
+  
+  /* global bootstrap: false */
+(() => {
+  'use strict'
+  const tooltipTriggerList = Array.from(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+  tooltipTriggerList.forEach(tooltipTriggerEl => {
+    new bootstrap.Tooltip(tooltipTriggerEl)
+  })
+})()
+
+  function setElementDisplay() {
+    const screenWidth = window.innerWidth;
+    const onbElements = document.getElementsByClassName('onb');
+    const snbElements = document.getElementsByClassName('snb');
+
+    if (screenWidth < 950) {
+      // Screen width is under 554px
+      for (const onbElement of onbElements) {
+        onbElement.classList.remove('d-flex');
+        onbElement.classList.add('d-none');
+      }
+
+      for (const snbElement of snbElements) {
+        snbElement.classList.remove('d-none');
+        snbElement.classList.add('d-flex');
+      }
+    } else {
+      // Screen width is over 554px
+      for (const onbElement of onbElements) {
+        onbElement.classList.remove('d-none');
+        onbElement.classList.add('d-flex');
+      }
+
+      for (const snbElement of snbElements) {
+        snbElement.classList.remove('d-flex');
+        snbElement.classList.add('d-none');
+      }
+    }
+  }
+
+  // Run the function on initial load and whenever the window is resized
+  window.addEventListener('load', setElementDisplay);
+  window.addEventListener('resize', setElementDisplay);
+
+setInterval(setElementDisplay(), 0)
+
+function addUser(me, user) {
+  console.log(user)
+  fetch('/user/' + me + '/addContact/' + user).then(res => res.json()).then(response => {
+    if (response.error) {
+      alert('something wen\'t wrong. try again later.')
+    } else {
+      window.location.assign('/messages/' + user)
+    }
+  })
+}
+
+  const form = document.querySelector('form')
+  form.addEventListener('submit', function(e){
+    e.preventDefault()
+    const input = form.children[0]
+   if (input.value.trim() == "") return;
+     const messageID = new Array('<%= me.username %>', '<%= user.username %>').sort().join("_")
+    const msg = {
+     username: '<%= me.username %>',
+     avatar: '<%= me.avatar %>',
+     content: input.value.trim()
+    }
+  fetch('/messages/' + messageID + '/send', {
+  method: "POST",
+  headers: {
+    "Content-Type": 'application/json',
+    "Accept": "application/json"
+  },
+  body: JSON.stringify(msg)
+  })
+    input.value = ""
+  })
+
+  window.scrollTo(0,0);
+  
+  let oldMsgs;
+
+  let i = 0;
+  setInterval(function(){
+   const messageID = new Array('<%= me.username %>', '<%= user.username %>').sort().join("_")
+  fetch('/getMessages/' + messageID).then(res => res.json()).then(msgs => {
+    console.log(msgs.status)
+      
+     oldMsgs = msgs
+      const messagesDiv = document.querySelector('#messages')
+      messagesDiv.innerHTML = ""
+   
+    var i=0;
+    for (msg of msgs) {
+      if (msg.username == '<%= me.username %>') {
+      messagesDiv.innerHTML =  messagesDiv.innerHTML + `
+      <div class="row g-0 outgoing">
+         <div class="col-6 card">
+           <div class="card-body">
+            ${msg.content}
+           </div>
+            </div>
+          </div>
+      `
+      } else {
+        if (!msgs.length > 1) {
+ messagesDiv.innerHTML =  messagesDiv.innerHTML + `
+          <div class="row g-0 incoming">
+            <div class="col-2" style="width:45px;">
+              <a href="/users/<%= user.username %>"><img src="${msg.avatar}" class="rounded-circle" width="32"></a>
+            </div>
+         <div class="col-6 card">
+           <div class="card-body">
+            ${msg.content}
+           </div>
+            </div>
+          </div>
+        `
+    } else {
+         if (i == 0) {
+           if (msgs[i].username == msg.username) {
+   messagesDiv.innerHTML =  messagesDiv.innerHTML + `
+          <div class="row g-0 incoming">
+            <div class="col-2" style="width:45px;">
+              <a><img src="https://www.colorhexa.com/A12BFE.png" class="rounded-circle" width="32" height="32"></a>
+            </div>
+         <div class="col-6 card">
+           <div class="card-body">
+            ${msg.content}
+           </div>
+            </div>
+          </div>
+        `
+  } else {
+   messagesDiv.innerHTML =  messagesDiv.innerHTML + `
+          <div class="row g-0 incoming">
+            <div class="col-2" style="width:45px;">
+              <a href="/users/<%= user.username %>"><img src="${msg.avatar}" class="rounded-circle" width="32"></a>
+            </div>
+         <div class="col-6 card">
+           <div class="card-body">
+            ${msg.content}
+           </div>
+            </div>
+          </div>
+        `
+  }
+        } else {
+        if (msgs[i - 1].username == msg.username) {
+ messagesDiv.innerHTML =  messagesDiv.innerHTML + `
+          <div class="row g-0 incoming">
+            <div class="col-2" style="width:45px;">
+              <a><img src="https://www.colorhexa.com/A12BFE.png" class="rounded-circle" width="32" height="32"></a>
+            </div>
+         <div class="col-6 card">
+           <div class="card-body">
+            ${msg.content}
+           </div>
+            </div>
+          </div>
+        `
+  } else {
+   messagesDiv.innerHTML =  messagesDiv.innerHTML + `
+          <div class="row g-0 incoming">
+            <div class="col-2" style="width:45px;">
+              <a href="/users/<%= user.username %>"><img src="${msg.avatar}" class="rounded-circle" width="32"></a>
+            </div>
+         <div class="col-6 card">
+           <div class="card-body">
+            ${msg.content}
+           </div>
+            </div>
+          </div>
+        `
+  }
+          }
+        }
+    
+      }
+     i += 1
+  }
+    })
+  }, 500)
+
+
+</script>
+  </body>
+</html>
+  <% } %>
