@@ -3,9 +3,6 @@
   "version": "2.0.3",
   "description": "Chatting just got easier. Talk with your friends with simplicity with Eclipse.",
   "main": "index.js",
-  "scripts": {
-    "build": "node -v && node index.js"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
