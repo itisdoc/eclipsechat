@@ -1,3 +1,5 @@
+// ECLIPSE APP CODE
+
 // INITIALIZING Server
 const express = require('express')
 const { QuickDB } = require("quick.db");
