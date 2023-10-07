@@ -1,10 +1,10 @@
 // INITIALIZING Server
 const express = require('express')
-const Database = require('@replit/database')
-const emails = new Database()
-const users = new Database()
-const messages = new Database()
-const servers = new Database()
+const { QuickDB } = require("quick.db");
+const path = require('path')
+const emails = new QuickDB({ filePath: path.join(__dirname, "/emails.sqlite") });
+const users = new QuickDB({ filePath: path.join(__dirname, "/users.sqlite") });
+const messages = new QuickDB({ filePath: path.join(__dirname, "/messages.sqlite") });
 const { parse, stringify, toJSON, fromJSON } = require('flatted');
 const cors = require('cors')
 
