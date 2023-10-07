@@ -503,3 +503,7 @@ app.get('/users/:user', async function(req, res) {
 app.listen(3000, () => {
   console.log('started')
 }) 
+
+
+module.exports = app;
+
