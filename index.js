@@ -12,17 +12,9 @@ const cors = require('cors')
 const app = express()
 app.use(cors())
 app.set('trust proxy', 1) // trust first proxy
-const session = require('express-session')
 var cookieParser = require('cookie-parser')
 app.use(cookieParser())
 
-// SESSION SET UP
-app.use(session({
-  secret: process.env.secret,
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true, maxAge: null }
-}))
 const randomString = require('random-string')
 
 
@@ -43,10 +35,10 @@ app.use(bodyParser.json());
 
 
 app.get('/api/me', (req, res) => {
-  if (!req.session.user) {
+  if (!req.cookies.user) {
     res.send(JSON.stringify({}))
   } else {
-    res.send(res.session.user)
+    res.send(res.cookies.user)
   }
 })
 
@@ -75,13 +67,13 @@ async function updateUsers() {
 updateUsers()
 
 app.get('/me/allMsgs', async (req, res) => {
-  if (!req.session.user) {
+  if (!req.cookies.user) {
     console.log('fail')
     res.send(JSON.stringify({ error: true }))
   } else {
     console.log('almsot sucess')
     const allMessages = Object.keys(await messages.getAll())
-    const filteredMsgs = allMessages.filter(n => n.includes(req.session.user.username))
+    const filteredMsgs = allMessages.filter(n => n.includes(req.cookies.user.username))
 
     let msgArray = []
     for (n in filteredMsgs) {
@@ -89,17 +81,17 @@ app.get('/me/allMsgs', async (req, res) => {
 
       msgArray.push(msg)
     }
-    if (msgArray[msgArray.length - 1].username == req.session.user.username) return res.send(JSON.stringify({ error: true }))
+    if (msgArray[msgArray.length - 1].username == req.cookies.user.username) return res.send(JSON.stringify({ error: true }))
     console.log('sendoff!')
     res.send(msgArray)
   }
 })
 
 app.get('/logout', async (req, res) => {
-  if (!req.session.user) {
+  if (!req.cookies.user) {
     res.redirect('/')
   } else {
-    delete req.session.user
+    delete req.cookies.user
     res.redirect('/')
   }
 })
@@ -155,7 +147,7 @@ function checkForMissingData(obj) {
 
 
 app.get('/', (req, res) => {
-  if (!req.session.user) {
+  if (!req.cookies.user) {
     res.sendFile(__dirname + `/views/index.html`)
   } else {
     res.redirect('/app')
@@ -189,7 +181,7 @@ app.post('/login', async (req, res) => {
             }
             res.send(JSON.stringify(errorJSON))
           } else if (isMatch) {
-            req.session.user = finalUser
+            req.cookies.user = finalUser
 
             res.send(JSON.stringify({ finished: true })).status(200)
           } else {
@@ -219,7 +211,7 @@ app.post('/login', async (req, res) => {
             }
             res.send(JSON.stringify(errorJSON))
           } else if (isMatch) {
-            req.session.user = finalUser
+            req.cookies.user = finalUser
 
             res.send(JSON.stringify({ finished: true })).status(200)
           } else {
@@ -270,7 +262,7 @@ app.post('/signup', async (req, res) => {
 
           await users.set(finalUser.username, finalUser)
           await emails.set(user.email, finalUser)
-          req.session.user = finalUser
+          req.cookies.user = finalUser
           res.send(JSON.stringify({ finished: true })).status(200)
 
         }
@@ -282,7 +274,7 @@ app.post('/signup', async (req, res) => {
 
 
 app.get('/login', async (req, res) => {
-  if (req.session.user) {
+  if (req.cookies.user) {
     res.redirect('/app')
   } else {
     if (req.cookies.accountKey) {
@@ -290,7 +282,7 @@ app.get('/login', async (req, res) => {
       const allUsers = userz.filter(u => u.contacts !== undefined)
       allUsers.forEach(user => {
         if (user.accountKeys && user.accountKeys.includes(req.cookies.accountKey)) {
-          req.session.user = user
+          req.cookies.user = user
           res.redirect('/app')
         }
       })
@@ -301,13 +293,13 @@ app.get('/login', async (req, res) => {
 })
 
 app.get('/me/allMsgs', async (req, res) => {
-  if (!req.session.user) {
+  if (!req.cookies.user) {
     console.log('fail')
     res.send(JSON.stringify({ error: true }))
   } else {
     console.log('almsot sucess')
     const allMessages = Object.keys(await messages.getAll())
-    const filteredMsgs = allMessages.filter(n => n.includes(req.session.user.username))
+    const filteredMsgs = allMessages.filter(n => n.includes(req.cookies.user.username))
 
     let msgArray = []
     for (n in filteredMsgs) {
@@ -315,24 +307,24 @@ app.get('/me/allMsgs', async (req, res) => {
 
       msgArray.push(msg)
     }
-    if (msgArray[msgArray.length - 1].username == req.session.user.username) return res.send(JSON.stringify({ error: true }))
+    if (msgArray[msgArray.length - 1].username == req.cookies.user.username) return res.send(JSON.stringify({ error: true }))
     console.log('sendoff!')
     res.send(msgArray)
   }
 })
 
 app.get('/logout', async (req, res) => {
-  if (!req.session.user) {
+  if (!req.cookies.user) {
     res.redirect('/')
   } else {
-    delete req.session.user
+    delete req.cookies.user
     res.redirect('/')
   }
 })
 
 
 app.get('/app', async (req, res) => {
-  if (!req.session.user) {
+  if (!req.cookies.user) {
     res.redirect('/login')
   } else {
     var device = require('device');
@@ -344,7 +336,7 @@ app.get('/app', async (req, res) => {
       is_desktop = false
     }
     const msgs = await messages.getAll()
-    const userr = await emails.get(req.session.user.email)
+    const userr = await emails.get(req.cookies.user.email)
     userr.lastOnline = Date.now()
     await emails.set(userr.email, userr)
     await users.set(userr.username, userr)
@@ -361,12 +353,12 @@ app.get('/app', async (req, res) => {
 })
 
 app.get('/user/:username', async (req, res) => {
-  const userr = await emails.get(req.session.user.email)
+  const userr = await emails.get(req.cookies.user.email)
   res.render('soon', { me: userr })
 })
 
 app.get('/messages/:username', async (req, res) => {
-  if (!req.session.user) {
+  if (!req.cookies.user) {
     res.redirect('/login')
   } else {
     var device = require('device');
@@ -377,9 +369,9 @@ app.get('/messages/:username', async (req, res) => {
     } else {
       is_desktop = false
     }
-    const member = new Array(req.session.user.username, req.params.username).sort().join('_')
+    const member = new Array(req.cookies.user.username, req.params.username).sort().join('_')
     const messageList = await messages.get(member)
-    const me = await emails.get(req.session.user.email)
+    const me = await emails.get(req.cookies.user.email)
     
     me.lastOnline = Date.now()
     await emails.set(me.email, userr)
@@ -392,7 +384,7 @@ app.get('/messages/:username', async (req, res) => {
 })
 
 app.get('/api/@me/setOnline', async (req, res) => {
-      const userr = await emails.get(req.session.user.email)
+      const userr = await emails.get(req.cookies.user.email)
 
     userr.lastOnline = Date.now()
     await emails.set(userr.email, userr)
@@ -435,23 +427,23 @@ app.post('/messages/:id/send', async (req, res) => {
 
 
 app.get('/servers', async (req, res) => {
-  const userr = await emails.get(req.session.user.email)
+  const userr = await emails.get(req.cookies.user.email)
   res.render('soon', { me: userr })
 })
 
 app.get('/api', async (req, res) => {
-  const userr = await emails.get(req.session.user.email)
+  const userr = await emails.get(req.cookies.user.email)
   res.render('soon', { me: userr })
 })
 
 app.get('/about', async (req, res) => {
-  const userr = await emails.get(req.session.user.email)
+  const userr = await emails.get(req.cookies.user.email)
   res.render('soon', { me: userr })
 })
 
 
 app.get('/user/:username/addContact/:contact', async function(req, res) {
-  if (!req.session.user) {
+  if (!req.cookies.user) {
     res.send(JSON.stringify({ error: "Must be logged in to add a contact." }))
   } else {
 
@@ -494,9 +486,9 @@ app.get('/user/:username/addContact/:contact', async function(req, res) {
 })
 
 app.get('/users/:user', async function(req, res) {
-  if (!req.session.user) res.redirect('/login')
+  if (!req.cookies.user) res.redirect('/login')
   const user = await users.get(req.params.user)
-  const me = await users.get(req.session.user.username)
+  const me = await users.get(req.cookies.user.username)
   if (user == null) return res.send('user doesn\'t exist! <a href="/app">go home</a>')
 
   res.render('user', { me, user })
