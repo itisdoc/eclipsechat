@@ -28,7 +28,7 @@ app.set('views', __dirname + '/views');
 
 app.use(device.capture());
 
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
