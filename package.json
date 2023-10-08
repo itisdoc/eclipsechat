@@ -2,7 +2,7 @@
   "name": "EclipseChat",
   "version": "2.0.3",
   "description": "Chatting just got easier. Talk with your friends with simplicity with Eclipse.",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/index.js"
@@ -10,6 +10,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
   "dependencies": {
     "@replit/database": "^2.0.5",
     "@types/node": "^18.0.6",
