@@ -6,7 +6,6 @@ const Database = require('@replit/database')
 const emails = new Database()
 const users = new Database()
 const messages = new Database()
-const { parse, stringify, toJSON, fromJSON } = require('flatter');
 const cors = require('cors')
 
 const app = express()
