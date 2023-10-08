@@ -1,26 +1,24 @@
 // ECLIPSE APP CODE
 
 // INITIALIZING Server
-const express = require('express')
-const Database = require('@replit/database')
+import 'express' as express;
+import '@replit/database' as Database;
 const emails = new Database()
 const users = new Database()
 const messages = new Database()
-const { parse, stringify, toJSON, fromJSON } = require('flatted');
-const cors = require('cors')
+from 'flatter' import { parse, stringify, toJSON, fromJSON };
+import 'cors' as cors;
 
 const app = express()
 app.use(cors())
 app.set('trust proxy', 1) // trust first proxy
-var cookieParser = require('cookie-parser')
+import 'cookie-parser' as cookieParser;
 app.use(cookieParser())
-
-const randomString = require('random-string')
 
 
 // ejs stuff
 app.set('view engine', 'ejs')
-var device = require('express-device');
+import 'express-device' as device
 
 app.set('view engine', 'ejs');
 app.set('view options', { layout: false });
@@ -28,9 +26,9 @@ app.set('views', __dirname + '/views');
 
 app.use(device.capture());
 
-const bcrypt = require('bcrypt');
+import 'bcrypt' as bcrypt
 
-const bodyParser = require('body-parser');
+import 'body-parser' as bodyParser
 app.use(bodyParser.json());
 
 
