@@ -16,6 +16,7 @@ const session = require('express-session')
 var cookieParser = require('cookie-parser')
 app.use(cookieParser())
 
+// SESSION SET UP
 app.use(session({
   secret: process.env.secret,
   resave: false,
@@ -24,6 +25,8 @@ app.use(session({
 }))
 const randomString = require('random-string')
 
+
+// ejs stuff
 app.set('view engine', 'ejs')
 var device = require('express-device');
 
